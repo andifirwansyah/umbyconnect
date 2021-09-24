@@ -45,6 +45,7 @@ export default StyleSheet.create({
     backgroundColor: Colors.GRAY_LIGHT100,
     borderRadius: 7,
     marginVertical: width * 0.02,
+    justifyContent: 'center',
   },
   input: {
     paddingLeft: width * 0.04,

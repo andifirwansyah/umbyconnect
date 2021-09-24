@@ -22,7 +22,7 @@ export default StyleSheet.create({
     height: width * 0.1,
     flexDirection: 'row',
     backgroundColor: Colors.WHITE_MEDIUM,
-    borderRadius: width * 0.03,
+    borderRadius: width * 0.04,
     alignItems: 'center',
     paddingHorizontal: width * 0.04,
   },
