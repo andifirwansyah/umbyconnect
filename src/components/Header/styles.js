@@ -37,6 +37,10 @@ export default StyleSheet.create({
     color: Colors.WHITE_MEDIUM100,
     paddingRight: 5,
   },
+  arrowLeftIcon: {
+    fontSize: RFValue(22),
+  },
+
   flexRight: {
     flexDirection: 'row',
     paddingLeft: width * 0.03,

@@ -13,14 +13,14 @@ import styles from './styles';
 const Home = ({navigation}) => {
   return (
     <Container backgroundColor={Colors.WHITE_MEDIUM} barStyle="dark-content">
-      <Header />
+      <Header showSearch={true} showNotification={true} showFilterUp={true} />
       <ScrollView>
         <View style={styles.container}>
           <CreateThreadCard
             onPress={() => navigation.navigate('CreateThread')}
           />
-          <ThreadCard />
-          <ThreadCard />
+          <ThreadCard goDetail={() => navigation.navigate('DetailThread')} />
+          <ThreadCard goDetail={() => navigation.navigate('DetailThread')} />
         </View>
       </ScrollView>
     </Container>

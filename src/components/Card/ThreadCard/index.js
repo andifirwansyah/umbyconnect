@@ -3,15 +3,21 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {Icon} from 'components';
 
-const ThreadCard = () => {
+const ThreadCard = props => {
+  const {goDetail, goProfile, detail} = props;
   return (
-    <View style={styles.container}>
+    <View style={styles.container(detail)}>
       <View style={styles.tpHCard}>
-        <Image source={require('assets/profile.jpeg')} style={styles.avatar} />
-        <View style={styles.tpHCardMiddle}>
-          <Text style={styles.fullName}>Suhail Kahar</Text>
-          <Text style={styles.postDate}>8 hours ago</Text>
-        </View>
+        <TouchableOpacity style={styles.tpHCardInfo} onPress={goProfile}>
+          <Image
+            source={require('assets/profile.jpeg')}
+            style={styles.avatar}
+          />
+          <View style={styles.tpHCardMiddle}>
+            <Text style={styles.fullName}>Suhail Kahar</Text>
+            <Text style={styles.postDate}>8 hours ago</Text>
+          </View>
+        </TouchableOpacity>
         <TouchableOpacity>
           <Icon
             name="dots-three-horizontal"
@@ -20,16 +26,18 @@ const ThreadCard = () => {
           />
         </TouchableOpacity>
       </View>
-      <Text style={styles.postTitle} numberOfLines={2}>
-        Top Free React Dashboards to Use for Your Next Project
-      </Text>
-      <Image
-        source={{
-          uri: 'https://cdn.devdojo.com/posts/images/September2021/5-ways-to-fetch-api-data-in-reactjs1.jpg',
-        }}
-        style={styles.postImage}
-      />
-      <View style={styles.btHcard}>
+      <TouchableOpacity onPress={goDetail}>
+        <Text style={styles.postTitle} numberOfLines={2}>
+          Top Free React Dashboards to Use for Your Next Project
+        </Text>
+        <Image
+          source={{
+            uri: 'https://cdn.devdojo.com/posts/images/September2021/5-ways-to-fetch-api-data-in-reactjs1.jpg',
+          }}
+          style={styles.postImage}
+        />
+      </TouchableOpacity>
+      <View style={styles.btHcard(detail)}>
         <View style={styles.btHFlex}>
           <View style={styles.reactionSection}>
             <TouchableOpacity style={styles.reactionBtn}>
@@ -66,6 +74,10 @@ const ThreadCard = () => {
       </View>
     </View>
   );
+};
+
+ThreadCard.defaultProps = {
+  detail: false,
 };
 
 export default ThreadCard;

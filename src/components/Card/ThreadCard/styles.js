@@ -4,14 +4,21 @@ import {RFValue, RFPercentage} from 'react-native-responsive-fontsize';
 const {width} = Dimensions.get('window');
 
 export default StyleSheet.create({
-  container: {
+  container: detail => ({
     backgroundColor: Colors.WHITE,
-    borderRadius: width * 0.03,
+    borderRadius: detail ? 0 : width * 0.03,
     paddingHorizontal: width * 0.03,
     paddingVertical: width * 0.03,
     marginTop: width * 0.04,
-  },
+    borderBottomWidth: detail ? 1 : 0,
+    borderBottomColor: Colors.GRAY_MEDIUM,
+  }),
   tpHCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  tpHCardInfo: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -23,7 +30,6 @@ export default StyleSheet.create({
     borderColor: Colors.PRIMARY,
   },
   tpHCardMiddle: {
-    flex: 1,
     paddingLeft: width * 0.03,
   },
   fullName: {
@@ -50,11 +56,12 @@ export default StyleSheet.create({
     height: width * 0.3,
     borderRadius: width * 0.03,
   },
-  btHcard: {
+  btHcard: detail => ({
     flexDirection: 'row',
-    marginTop: width * 0.03,
+    marginTop: detail ? width * 0.08 : width * 0.03,
+    marginBottom: detail ? width * 0.04 : 0,
     alignItems: 'center',
-  },
+  }),
   btHFlex: {
     flex: 1,
   },
