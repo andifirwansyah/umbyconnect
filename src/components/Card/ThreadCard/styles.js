@@ -47,7 +47,7 @@ export default StyleSheet.create({
     color: Colors.BLACK_MATE,
   },
   postTitle: {
-    fontSize: RFValue(20),
+    fontSize: RFValue(17),
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
     marginVertical: width * 0.04,
   },

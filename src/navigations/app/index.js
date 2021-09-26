@@ -2,7 +2,7 @@ import React from 'react';
 import {Platform} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigator from '../tabs';
-import {CreateThread, DetailThread} from 'scenes';
+import {CreateThread, DetailThread, FriendProfile} from 'scenes';
 
 const Stack = createNativeStackNavigator();
 const AppStack = () => (
@@ -10,6 +10,7 @@ const AppStack = () => (
     <Stack.Group screenOptions={{headerShown: false}}>
       <Stack.Screen name="Main" component={TabNavigator} />
       <Stack.Screen name="DetailThread" component={DetailThread} />
+      <Stack.Screen name="FriendProfile" component={FriendProfile} />
     </Stack.Group>
     <Stack.Group
       screenOptions={{

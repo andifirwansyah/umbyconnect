@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {Container, Icon, Header} from 'components';
+import {View, ScrollView} from 'react-native';
+import {Container, Header, ThreadCard} from 'components';
 import {Colors} from 'styles';
+import styles from './styles';
 
 const Thread = ({route, navigation}) => {
   const {params} = route.params;
@@ -13,6 +14,18 @@ const Thread = ({route, navigation}) => {
         showFilterUp={true}
         navigation={navigation}
       />
+      <ScrollView>
+        <View style={styles.container}>
+          <ThreadCard
+            goDetail={() => navigation.navigate('DetailThread')}
+            goProfile={() => navigation.navigate('FriendProfile')}
+          />
+          <ThreadCard
+            goDetail={() => navigation.navigate('DetailThread')}
+            goProfile={() => navigation.navigate('FriendProfile')}
+          />
+        </View>
+      </ScrollView>
     </Container>
   );
 };

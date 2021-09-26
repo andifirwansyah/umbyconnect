@@ -19,8 +19,14 @@ const Home = ({navigation}) => {
           <CreateThreadCard
             onPress={() => navigation.navigate('CreateThread')}
           />
-          <ThreadCard goDetail={() => navigation.navigate('DetailThread')} />
-          <ThreadCard goDetail={() => navigation.navigate('DetailThread')} />
+          <ThreadCard
+            goDetail={() => navigation.navigate('DetailThread')}
+            goProfile={() => navigation.navigate('FriendProfile')}
+          />
+          <ThreadCard
+            goDetail={() => navigation.navigate('DetailThread')}
+            goProfile={() => navigation.navigate('FriendProfile')}
+          />
         </View>
       </ScrollView>
     </Container>

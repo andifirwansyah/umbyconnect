@@ -6,6 +6,7 @@ import CreateThread from './CreateThread';
 import DetailThread from './DetailThread';
 import Topic from './Topic';
 import Thread from './Thread';
+import FriendProfile from './FriendProfile';
 
 export {
   SignIn,
@@ -16,4 +17,5 @@ export {
   DetailThread,
   Topic,
   Thread,
+  FriendProfile,
 };

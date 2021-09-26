@@ -1,6 +1,7 @@
 export const PRIMARY = '#6666FF';
 export const SECONDARY = '#6C84F2';
 export const PRIMARY_MATE = '#697590';
+export const PRIMARY_DARK = '#26265c';
 export const BLACK = '#000000';
 export const BLACK_LIGHT = '#B4B4B4';
 export const BLACK_TEXT = '#555555';
