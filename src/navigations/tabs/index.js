@@ -2,8 +2,9 @@ import React from 'react';
 import {View, Image, Dimensions} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icons} from 'constants';
-import {Home} from 'scenes';
+import {Home, Topic, Thread} from 'scenes';
 import {Colors} from 'styles';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const {width} = Dimensions.get('window');
 
 const ProfileIcon = ({focused}) => (
@@ -32,6 +33,14 @@ const TabIcon = ({routeName, focused}) => {
   );
 };
 
+const TopicStack = createNativeStackNavigator();
+const TopicStackScene = () => (
+  <TopicStack.Navigator screenOptions={{headerShown: false}}>
+    <TopicStack.Screen name="TopicMain" component={Topic} />
+    <TopicStack.Screen name="Thread" component={Thread} />
+  </TopicStack.Navigator>
+);
+
 const TabNav = createBottomTabNavigator();
 const TabNavigator = () => (
   <TabNav.Navigator
@@ -43,9 +52,10 @@ const TabNavigator = () => (
       tabBarShowLabel: false,
     })}>
     <TabNav.Screen name="Home" component={Home} />
-    <TabNav.Screen name="Topic" component={Home} />
+    <TabNav.Screen name="Topic" component={TopicStackScene} />
     <TabNav.Screen name="Friend" component={Home} />
     <TabNav.Screen name="Profile" component={Home} />
+    {/* <TabNav.Screen name="Thread" component={Thread} /> */}
   </TabNav.Navigator>
 );
 

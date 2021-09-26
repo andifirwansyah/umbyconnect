@@ -37,6 +37,24 @@ export default StyleSheet.create({
     color: Colors.WHITE_MEDIUM100,
     paddingRight: 5,
   },
+  flexLeftArrow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  lgTitle: {
+    fontSize: RFValue(17),
+    fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
+  },
+  smTitle: {
+    fontSize: RFValue(16),
+    fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
+    paddingLeft: width * 0.04,
+  },
+  smTitleIcon: {
+    width: width * 0.06,
+    height: width * 0.06,
+    marginLeft: width * 0.02,
+  },
   arrowLeftIcon: {
     fontSize: RFValue(22),
   },

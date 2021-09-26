@@ -5,7 +5,15 @@ import styles from './styles';
 import {Colors} from 'styles';
 
 const Header = props => {
-  const {showSearch, showNotification, showFilterUp, showShare} = props;
+  const {
+    showSearch,
+    showNotification,
+    showFilterUp,
+    showShare,
+    smTitle,
+    lgTitle,
+    smTitleIcon,
+  } = props;
   return (
     <View style={styles.container}>
       <View style={styles.section}>
@@ -19,16 +27,28 @@ const Header = props => {
                 placeholderTextColor={Colors.WHITE_MEDIUM100}
               />
             </View>
+          ) : lgTitle ? (
+            <Text numberOfLines={1} style={styles.lgTitle}>
+              {lgTitle}
+            </Text>
           ) : (
-            <TouchableOpacity
-              style={styles.btnRightIconSection}
-              onPress={() => props.navigation.goBack()}>
-              <Icon
-                name="arrow-left"
-                type="Feather"
-                style={styles.arrowLeftIcon}
-              />
-            </TouchableOpacity>
+            <View style={styles.flexLeftArrow}>
+              <TouchableOpacity
+                style={styles.btnRightIconSection}
+                onPress={() => props.navigation.goBack()}>
+                <Icon
+                  name="arrow-left"
+                  type="Feather"
+                  style={styles.arrowLeftIcon}
+                />
+              </TouchableOpacity>
+              <Text numberOfLines={1} style={styles.smTitle}>
+                {smTitle}
+              </Text>
+              {smTitleIcon && (
+                <Image source={smTitleIcon} style={styles.smTitleIcon} />
+              )}
+            </View>
           )}
         </View>
         <View style={styles.flexRight}>
@@ -80,6 +100,8 @@ Header.defaultProps = {
   showNotification: false,
   showFilterUp: false,
   showShare: false,
+  smTitle: '',
+  lgTitle: '',
 };
 
 export default Header;

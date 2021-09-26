@@ -4,5 +4,16 @@ import ChooseAvatar from './Auth/ChooseAvatar';
 import Home from './Home';
 import CreateThread from './CreateThread';
 import DetailThread from './DetailThread';
+import Topic from './Topic';
+import Thread from './Thread';
 
-export {SignIn, SignUp, ChooseAvatar, Home, CreateThread, DetailThread};
+export {
+  SignIn,
+  SignUp,
+  ChooseAvatar,
+  Home,
+  CreateThread,
+  DetailThread,
+  Topic,
+  Thread,
+};
