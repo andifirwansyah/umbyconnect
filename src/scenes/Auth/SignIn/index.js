@@ -6,16 +6,27 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  ScrollView,
-  KeyboardAvoidingView,
+  ActivityIndicator,
 } from 'react-native';
 import styles from './styles';
-import {Container, Icon} from 'components';
+import {Icon} from 'components';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import useSignIn from './useSignIn';
+import {Colors} from 'styles';
 
 const SignIn = ({navigation}) => {
-  const [passwordVisible, setPasswordVisible] = useState(true);
-
+  const {
+    loading,
+    email,
+    password,
+    passwordVisible,
+    setEmail,
+    setPassword,
+    setPasswordVisible,
+    handleUserLogin,
+    isInputEmpty,
+    error,
+  } = useSignIn();
   return (
     <SafeAreaProvider style={styles.container}>
       <StatusBar
@@ -37,6 +48,8 @@ const SignIn = ({navigation}) => {
             style={styles.input}
             placeholder="Username atau Email"
             placeholderTextColor="#9CA3AF"
+            onChangeText={val => setEmail(val)}
+            value={email}
           />
         </View>
         <View style={styles.inputItemPassword}>
@@ -45,6 +58,8 @@ const SignIn = ({navigation}) => {
             placeholder="Kata Sandi"
             placeholderTextColor="#9CA3AF"
             secureTextEntry={passwordVisible}
+            onChangeText={val => setPassword(val)}
+            value={password}
           />
           <TouchableOpacity
             onPress={() => setPasswordVisible(!passwordVisible)}>
@@ -56,10 +71,16 @@ const SignIn = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-          style={styles.btnSignIn}
-          onPress={() => navigation.navigate('App')}>
-          <Text style={styles.btnSignInTitle}>Masuk</Text>
+          style={styles.btnSignIn(isInputEmpty() ? true : false)}
+          onPress={() => handleUserLogin()}
+          disabled={isInputEmpty() ? true : false}>
+          {loading ? (
+            <ActivityIndicator size="small" color={Colors.WHITE} />
+          ) : (
+            <Text style={styles.btnSignInTitle}>Masuk</Text>
+          )}
         </TouchableOpacity>
+        {error ? <Text style={styles.error}>{error}</Text> : null}
         <View style={styles.fgtPSection}>
           <Text style={styles.fgtPSectionLable}>Lupa Kata Sandi?</Text>
           <TouchableOpacity>

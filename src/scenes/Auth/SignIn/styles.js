@@ -25,7 +25,7 @@ export default StyleSheet.create({
     height: width * 0.5,
     position: 'absolute',
     left: 0,
-    marginTop: -5,
+    marginTop: -10,
   },
   rLBottom: {
     width: width * 0.8,
@@ -71,14 +71,14 @@ export default StyleSheet.create({
     color: visible ? Colors.PRIMARY_MATE : Colors.PRIMARY,
     paddingRight: width * 0.03,
   }),
-  btnSignIn: {
+  btnSignIn: disabled => ({
     height: width * 0.11,
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: disabled ? 'rgba(102, 102, 255, .8)' : Colors.PRIMARY,
     borderRadius: 6,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: width * 0.06,
-  },
+  }),
   btnSignInTitle: {
     fontSize: RFValue(15),
     color: Colors.WHITE,
@@ -115,5 +115,11 @@ export default StyleSheet.create({
     fontSize: RFValue(15),
     color: Colors.PRIMARY,
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
+  },
+  error: {
+    fontSize: RFValue(12),
+    color: Colors.DANGER,
+    textAlign: 'center',
+    marginTop: 10,
   },
 });
