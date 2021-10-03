@@ -37,17 +37,17 @@ export default StyleSheet.create({
     justifyContent: 'center',
     marginBottom: width * 0.06,
   },
-  loadAvatar: {
+  loadAvatar: hasUploaded => ({
     width: width * 0.22,
     height: width * 0.22,
     borderRadius: 75,
     borderWidth: 3,
     borderStyle: 'dashed',
-    borderColor: Colors.GRAY_LIGHT100,
+    borderColor: hasUploaded ? Colors.PRIMARY : Colors.GRAY_LIGHT100,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: width * 0.03,
-  },
+  }),
   loadAvatarIcon: {
     width: width * 0.13,
     height: width * 0.13,
@@ -56,6 +56,34 @@ export default StyleSheet.create({
     fontSize: RFValue(12),
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
     color: Colors.PRIMARY_MATE,
+  },
+  avatarUploaded: {
+    width: width * 0.19,
+    height: width * 0.19,
+    borderRadius: 75,
+  },
+  deleteButton: {
+    width: width * 0.07,
+    height: width * 0.07,
+    backgroundColor: Colors.PRIMARY,
+    borderRadius: 75,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
+  },
+  deleteButtonIcon: {
+    fontSize: RFValue(16),
+    color: Colors.WHITE,
   },
   separator: {
     width: width,
@@ -81,11 +109,11 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   }),
-  avatar: isSelected => ({
+  avatar: (isSelected, hasUploadAvatar) => ({
     width: isSelected ? width * 0.154 : width * 0.175,
     height: isSelected ? width * 0.154 : width * 0.175,
     borderRadius: 75,
-    opacity: isSelected ? 0.5 : 1,
+    opacity: isSelected ? 0.5 : hasUploadAvatar ? 0.5 : 1,
   }),
   btnNext: {
     height: width * 0.11,

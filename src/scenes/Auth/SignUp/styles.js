@@ -40,6 +40,11 @@ export default StyleSheet.create({
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
     marginBottom: width * 0.1,
   },
+  errorNote: {
+    fontSize: RFValue(11),
+    marginLeft: width * 0.02,
+    color: Colors.DANGER,
+  },
   inputItem: {
     height: width * 0.12,
     backgroundColor: Colors.GRAY_LIGHT100,
@@ -71,14 +76,14 @@ export default StyleSheet.create({
     color: visible ? Colors.PRIMARY_MATE : Colors.PRIMARY,
     paddingRight: width * 0.03,
   }),
-  btnSignIn: {
+  btnSignIn: disabled => ({
     height: width * 0.11,
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: disabled ? 'rgba(102, 102, 255, .8)' : Colors.PRIMARY,
     borderRadius: 6,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: width * 0.06,
-  },
+  }),
   btnSignInTitle: {
     fontSize: RFValue(15),
     color: Colors.WHITE,
