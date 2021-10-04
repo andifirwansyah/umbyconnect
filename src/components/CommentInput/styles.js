@@ -5,7 +5,7 @@ import {ifIphoneX} from 'react-native-iphone-x-helper';
 const {width} = Dimensions.get('window');
 
 export default StyleSheet.create({
-  container: keyboardStatus => ({
+  container: {
     width: width,
     backgroundColor: Colors.WHITE,
     shadowColor: '#000',
@@ -13,7 +13,6 @@ export default StyleSheet.create({
       width: 0,
       height: 5,
     },
-    bottom: keyboardStatus ? width * 0 : 0,
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
     elevation: 10,
@@ -26,13 +25,14 @@ export default StyleSheet.create({
       },
       {
         // height: width * 0.15,
-        height: width * 0.15,
+        // maxHeight: width * 0.3,
+        paddingVertical: width * 0.02,
       },
     ),
-  }),
+  },
   linkWrap: {
-    width: width * 0.11,
-    height: width * 0.11,
+    width: width * 0.1,
+    height: width * 0.1,
     backgroundColor: Colors.WHITE_MEDIUM,
     borderRadius: 75,
     alignItems: 'center',
@@ -41,22 +41,23 @@ export default StyleSheet.create({
   linkIcon: {
     fontSize: RFValue(22),
   },
-  inputSection: {
+  inputSection: heightVal => ({
     flex: 1,
-    height: width * 0.11,
+    maxHeight: width * 0.3,
+    height: heightVal > 40 ? heightVal : width * 0.11,
     backgroundColor: Colors.WHITE_MEDIUM,
-    borderRadius: width * 0.5,
+    borderRadius: 20,
     marginHorizontal: width * 0.02,
-  },
+  }),
   input: {
     flex: 1,
-    fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
+    fontFamily: Fonts.ARIAL,
     fontSize: RFValue(14),
     paddingHorizontal: width * 0.04,
   },
   sendWrap: {
-    width: width * 0.11,
-    height: width * 0.11,
+    width: width * 0.1,
+    height: width * 0.1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.PRIMARY,

@@ -28,6 +28,7 @@ export default StyleSheet.create({
     borderRadius: 75,
     borderWidth: 2,
     borderColor: Colors.PRIMARY,
+    backgroundColor: Colors.WHITE,
   },
   tpHCardMiddle: {
     paddingLeft: width * 0.03,
@@ -35,19 +36,19 @@ export default StyleSheet.create({
   fullName: {
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
     color: Colors.BLACK_MATE,
-    fontSize: RFValue(17),
+    fontSize: RFValue(12),
   },
   postDate: {
     fontFamily: Fonts.ARIAL,
     color: Colors.BLACK_LABLE,
-    fontSize: RFValue(12),
+    fontSize: RFValue(11),
   },
   reportIcon: {
-    fontSize: RFValue(18),
+    fontSize: RFValue(16),
     color: Colors.BLACK_MATE,
   },
   postTitle: {
-    fontSize: RFValue(17),
+    fontSize: RFValue(15),
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
     marginVertical: width * 0.04,
   },
@@ -67,7 +68,7 @@ export default StyleSheet.create({
   },
   reactionSection: {
     flexDirection: 'row',
-    width: width * 0.35,
+    width: width * 0.3,
     height: width * 0.08,
     borderRadius: width * 0.015,
     backgroundColor: Colors.WHITE_MEDIUM,
@@ -75,23 +76,23 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   reactionBtn: {
-    marginHorizontal: width * 0.03,
+    marginHorizontal: width * 0.025,
   },
   reactionIcon: {
-    width: width * 0.055,
-    height: width * 0.055,
+    width: width * 0.05,
+    height: width * 0.05,
   },
   totalViewSection: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   viewIcon: {
-    width: width * 0.055,
-    height: width * 0.055,
+    width: width * 0.05,
+    height: width * 0.05,
   },
   totalView: {
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
-    fontSize: RFValue(12),
+    fontSize: RFValue(11),
     color: Colors.BLACK_MATE,
     marginLeft: width * 0.01,
   },
@@ -101,12 +102,12 @@ export default StyleSheet.create({
     marginLeft: width * 0.08,
   },
   commentIcon: {
-    width: width * 0.055,
-    height: width * 0.055,
+    width: width * 0.05,
+    height: width * 0.05,
   },
   totalComment: {
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
-    fontSize: RFValue(12),
+    fontSize: RFValue(11),
     color: Colors.BLACK_MATE,
     marginLeft: width * 0.01,
   },

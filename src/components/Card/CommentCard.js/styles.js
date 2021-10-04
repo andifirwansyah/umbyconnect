@@ -15,8 +15,8 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   avatar: {
-    width: width * 0.11,
-    height: width * 0.11,
+    width: width * 0.1,
+    height: width * 0.1,
     borderRadius: 75,
   },
   profileInfo: {
@@ -24,12 +24,13 @@ export default StyleSheet.create({
   },
   fullName: {
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
-    fontSize: RFValue(17),
+    fontSize: RFValue(14),
+    color: Colors.BLACK_MATE,
   },
   commentDate: {
     fontFamily: Fonts.ARIAL,
     color: Colors.BLACK_LABLE,
-    fontSize: RFValue(12),
+    fontSize: RFValue(11),
   },
   commentSection: {
     marginVertical: width * 0.03,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ActivityIndicator, FlatList} from 'react-native';
 import {
   Container,
   Icon,
@@ -9,26 +9,58 @@ import {
 } from 'components';
 import {Colors} from 'styles';
 import styles from './styles';
+import useHome from './useHome';
 
 const Home = ({navigation}) => {
+  const {
+    loading,
+    threads,
+    sortThread,
+    handleSortThreads,
+    handleLoadMoreThreads,
+  } = useHome();
   return (
     <Container backgroundColor={Colors.WHITE_MEDIUM} barStyle="dark-content">
-      <Header showSearch={true} showNotification={true} showFilterUp={true} />
-      <ScrollView>
-        <View style={styles.container}>
+      <Header
+        showSearch={true}
+        showNotification={true}
+        showFilterUp={true}
+        sortType={sortThread}
+        onFilter={() => handleSortThreads()}
+      />
+      <FlatList
+        data={threads}
+        contentContainerStyle={styles.container}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item, index}) => (
+          <ThreadCard
+            data={item}
+            goDetail={() => navigation.navigate('DetailThread', {thread: item})}
+            goProfile={() =>
+              navigation.navigate('FriendProfile', {
+                username: item.user.username,
+                userId: item.user.id,
+              })
+            }
+          />
+        )}
+        ListHeaderComponent={
           <CreateThreadCard
             onPress={() => navigation.navigate('CreateThread')}
           />
-          <ThreadCard
-            goDetail={() => navigation.navigate('DetailThread')}
-            goProfile={() => navigation.navigate('FriendProfile')}
-          />
-          <ThreadCard
-            goDetail={() => navigation.navigate('DetailThread')}
-            goProfile={() => navigation.navigate('FriendProfile')}
-          />
-        </View>
-      </ScrollView>
+        }
+        ListFooterComponent={
+          loading && (
+            <ActivityIndicator
+              size="small"
+              color={Colors.PRIMARY}
+              style={{marginVertical: 20}}
+            />
+          )
+        }
+        onEndReached={() => handleLoadMoreThreads()}
+      />
+      {/* {loading && <ActivityIndicator size="small" color={Colors.PRIMARY} />} */}
     </Container>
   );
 };

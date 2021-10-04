@@ -13,6 +13,7 @@ const Header = props => {
     smTitle,
     lgTitle,
     smTitleIcon,
+    sortType,
   } = props;
   return (
     <View style={styles.container}>
@@ -69,10 +70,17 @@ const Header = props => {
               <TouchableOpacity
                 style={styles.btnRightIconSection}
                 onPress={props.onFilter}>
-                <Image
-                  source={require('assets/arrows-outline-up-and-down.png')}
-                  style={styles.btnRightIcon2}
-                />
+                {sortType === 'desc' ? (
+                  <Image
+                    source={require('assets/arrows-outline-up-and-down.png')}
+                    style={styles.btnRightIcon2}
+                  />
+                ) : (
+                  <Image
+                    source={require('assets/arrows-outline-up-and-up.png')}
+                    style={styles.btnRightIcon2}
+                  />
+                )}
               </TouchableOpacity>
             </View>
           )}

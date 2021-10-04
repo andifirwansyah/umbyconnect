@@ -2,20 +2,20 @@ import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {Icon} from 'components';
+import moment from 'moment';
 
 const ThreadCard = props => {
-  const {goDetail, goProfile, detail} = props;
+  const {goDetail, goProfile, detail, data} = props;
   return (
     <View style={styles.container(detail)}>
       <View style={styles.tpHCard}>
         <TouchableOpacity style={styles.tpHCardInfo} onPress={goProfile}>
-          <Image
-            source={require('assets/profile.jpeg')}
-            style={styles.avatar}
-          />
+          <Image source={{uri: data.user.avatar}} style={styles.avatar} />
           <View style={styles.tpHCardMiddle}>
-            <Text style={styles.fullName}>Suhail Kahar</Text>
-            <Text style={styles.postDate}>8 hours ago</Text>
+            <Text style={styles.fullName}>{data.user.full_name}</Text>
+            <Text style={styles.postDate}>
+              {moment(data.created_at).startOf('day').fromNow()}
+            </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity>
@@ -28,14 +28,16 @@ const ThreadCard = props => {
       </View>
       <TouchableOpacity onPress={goDetail}>
         <Text style={styles.postTitle} numberOfLines={2}>
-          Top Free React Dashboards to Use for Your Next Project
+          {data.title}
         </Text>
-        <Image
-          source={{
-            uri: 'https://cdn.devdojo.com/posts/images/September2021/5-ways-to-fetch-api-data-in-reactjs1.jpg',
-          }}
-          style={styles.postImage}
-        />
+        {data.image && (
+          <Image
+            source={{
+              uri: data.image,
+            }}
+            style={styles.postImage}
+          />
+        )}
       </TouchableOpacity>
       <View style={styles.btHcard(detail)}>
         <View style={styles.btHFlex}>
@@ -69,7 +71,7 @@ const ThreadCard = props => {
             source={require('assets/comments.png')}
             style={styles.commentIcon}
           />
-          <Text style={styles.totalComment}>100</Text>
+          <Text style={styles.totalComment}>{data.total_comment}</Text>
         </View>
       </View>
     </View>

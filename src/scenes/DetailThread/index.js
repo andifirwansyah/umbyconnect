@@ -1,12 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-  Keyboard,
-} from 'react-native';
+import React from 'react';
+import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import {
   Container,
   Header,
@@ -16,46 +9,54 @@ import {
 } from 'components';
 import styles from './styles';
 import {Colors} from 'styles';
+import useDetailThread from './useDetailThread';
 
-const DetailThread = ({navigation}) => {
-  const [keyboardStatus, setKeyboardStatus] = useState(false);
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      event => {
-        setKeyboardStatus(true);
-      },
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      event => {
-        setKeyboardStatus(false);
-      },
-    );
+const DetailThread = ({route, navigation}) => {
+  const {thread} = route.params;
+  const {
+    loading,
+    comments,
+    handleLoadMoreComment,
+    comment,
+    setComment,
+    handleSendComment,
+  } = useDetailThread(thread.id);
 
-    return () => {
-      keyboardDidHideListener.remove();
-      keyboardDidShowListener.remove();
-    };
-  }, []);
   return (
     <Container backgroundColor={Colors.WHITE} barStyle="dark-content">
       <Header showShare={true} navigation={navigation} />
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'padding'}
-        style={{flex: 1}}>
-        <ScrollView>
-          <View style={styles.container}>
+      <FlatList
+        data={comments}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item, index}) => <CommentCard data={item} />}
+        ListHeaderComponent={
+          <>
             <ThreadCard
               detail
+              data={thread}
               goDetail={() => navigation.navigate('DetailThread')}
             />
-            <CommentCard />
-            <CommentCard />
-          </View>
-        </ScrollView>
-        <CommentInput keyboardStatus={keyboardStatus} />
-      </KeyboardAvoidingView>
+            {loading && (
+              <ActivityIndicator size="small" color={Colors.PRIMAR} />
+            )}
+          </>
+        }
+        ListFooterComponent={() =>
+          !loading &&
+          comments.length === 0 && (
+            <View style={styles.noComment}>
+              <Text style={styles.noCommentLable}>Belum ada komentar.</Text>
+            </View>
+          )
+        }
+        onEndReached={() => handleLoadMoreComment()}
+        onEndReachedThreshold={0}
+      />
+      <CommentInput
+        onChangeText={val => setComment(val)}
+        value={comment}
+        onSend={() => handleSendComment()}
+      />
     </Container>
   );
 };
