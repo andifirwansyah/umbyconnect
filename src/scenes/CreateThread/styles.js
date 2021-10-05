@@ -15,14 +15,16 @@ export default StyleSheet.create({
   },
   bodyInput: {
     fontSize: RFValue(14),
+    height: width * 0.8,
+    maxHeight: width * 0.8,
+    textAlignVertical: 'top',
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
   },
   optionSection: {
     width: width,
     backgroundColor: Colors.WHITE,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    position: 'absolute',
+    borderTopLeftRadius: width * 0.05,
+    borderTopRightRadius: width * 0.05,
     elevation: 20,
     shadowColor: '#000',
     shadowOffset: {
@@ -32,7 +34,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     paddingHorizontal: width * 0.04,
-    paddingVertical: width * 0.03,
+    paddingVertical: width * 0.02,
     flexDirection: 'row',
     alignItems: 'center',
   },
