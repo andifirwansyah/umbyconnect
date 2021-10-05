@@ -47,7 +47,7 @@ const Header = props => {
                 {smTitle}
               </Text>
               {smTitleIcon && (
-                <Image source={smTitleIcon} style={styles.smTitleIcon} />
+                <Image source={{uri: smTitleIcon}} style={styles.smTitleIcon} />
               )}
             </View>
           )}
