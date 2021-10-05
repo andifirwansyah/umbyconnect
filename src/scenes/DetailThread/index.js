@@ -41,6 +41,7 @@ const DetailThread = ({route, navigation}) => {
             <ThreadCard
               detail
               data={thread}
+              commentTotal={comments.length}
               goDetail={() => navigation.navigate('DetailThread')}
             />
             {loading && (

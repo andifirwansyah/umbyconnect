@@ -5,7 +5,7 @@ import {Icon} from 'components';
 import moment from 'moment';
 
 const ThreadCard = props => {
-  const {goDetail, goProfile, detail, data} = props;
+  const {goDetail, goProfile, detail, data, commentTotal} = props;
   return (
     <View style={styles.container(detail)}>
       <View style={styles.tpHCard}>
@@ -71,7 +71,9 @@ const ThreadCard = props => {
             source={require('assets/comments.png')}
             style={styles.commentIcon}
           />
-          <Text style={styles.totalComment}>{data.total_comment}</Text>
+          <Text style={styles.totalComment}>
+            {commentTotal !== undefined ? commentTotal : data.total_comment}
+          </Text>
         </View>
       </View>
     </View>
