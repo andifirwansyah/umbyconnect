@@ -15,7 +15,7 @@ import moment from 'moment';
 const CommentCard = props => {
   const [reactAnimation, setReactAnimation] = useState(new Animated.Value(30));
   const [showReaction, setShowReaction] = useState(false);
-  const {goProfile, data} = props;
+  const {goProfile, data, onReaction} = props;
 
   const handleShowReaction = () => {
     if (showReaction) {
@@ -41,7 +41,8 @@ const CommentCard = props => {
     }
   };
 
-  const handleReactionPressed = () => {
+  const handleReactionPressed = (type) => {
+    onReaction(type);
     reactAnimation.setValue(0);
     Animated.timing(reactAnimation, {
       toValue: 100,
@@ -114,7 +115,7 @@ const CommentCard = props => {
           ]}>
           <TouchableOpacity
             style={styles.reactionIconButton}
-            onPress={() => handleReactionPressed()}>
+            onPress={() => handleReactionPressed('beer')}>
             <Image
               source={require('assets/reaction-icon/beers.png')}
               style={styles.reactionIcon}
@@ -122,7 +123,7 @@ const CommentCard = props => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.reactionIconButton}
-            onPress={() => handleReactionPressed()}>
+            onPress={() => handleReactionPressed('love')}>
             <Image
               source={require('assets/reaction-icon/love.png')}
               style={styles.reactionIcon}
@@ -130,7 +131,7 @@ const CommentCard = props => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.reactionIconButton}
-            onPress={() => handleReactionPressed()}>
+            onPress={() => handleReactionPressed('raised_hands')}>
             <Image
               source={require('assets/reaction-icon/raised_hands.png')}
               style={styles.reactionIcon}
@@ -138,7 +139,7 @@ const CommentCard = props => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.reactionIconButton}
-            onPress={() => handleReactionPressed()}>
+            onPress={() => handleReactionPressed('clap')}>
             <Image
               source={require('assets/reaction-icon/clap.png')}
               style={styles.reactionIcon}

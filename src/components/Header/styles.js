@@ -56,7 +56,7 @@ export default StyleSheet.create({
     marginLeft: width * 0.02,
   },
   arrowLeftIcon: {
-    fontSize: RFValue(22),
+    fontSize: RFValue(19),
   },
 
   flexRight: {
@@ -69,8 +69,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   btnRightIconSection: {
-    width: width * 0.1,
-    height: width * 0.1,
+    width: width * 0.095,
+    height: width * 0.095,
     backgroundColor: Colors.WHITE_MEDIUM,
     borderRadius: 75,
     alignItems: 'center',

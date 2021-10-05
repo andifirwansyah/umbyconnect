@@ -1,6 +1,11 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useState, useEffect} from 'react';
-import {getThreadComment} from 'utils';
+import {
+  getThreadComment,
+  createThreadComment,
+  createThreadCommentReaction,
+} from 'utils';
 import {useSelector} from 'react-redux';
 const useDetailThread = threadId => {
   const userData = useSelector(state => state.user.data);
@@ -8,6 +13,7 @@ const useDetailThread = threadId => {
   const [comments, setComments] = useState([]); // all comment from database
   const [commentLimit, setCommentLimit] = useState(10);
   const [comment, setComment] = useState(''); // current user comment state
+  const [loadingSend, setLoadingSend] = useState(false);
 
   useEffect(() => {
     handleThreadComment();
@@ -29,32 +35,41 @@ const useDetailThread = threadId => {
   };
 
   const handleSendComment = async () => {
-    const commentInput = {
-      id: 0,
-      user_id: userData.id,
-      body: comment,
-      created_at: new Date(),
-      reaction: [
-        {
-          id: 1,
-          type: 'beer',
-          total: 10,
-        },
-        {
-          id: 1,
-          type: 'clap',
-          total: 5,
-        },
-        {
-          id: 1,
-          type: 'love',
-          total: 2,
-        },
-      ],
-      user: userData,
-    };
-    setComments(comments => [...comments, commentInput]);
-    setComment('');
+    setLoadingSend(true);
+    const response = await createThreadComment(threadId, {
+      comment: comment,
+    });
+    if (response.request.status === 200) {
+      setComments(comments => [...comments, response.data]);
+      setComment('');
+    } else {
+      alert('Oops, Something went wrong. Please try again');
+    }
+    setLoadingSend(false);
+  };
+
+  const handleReactionThread = async (type, commentId) => {
+    const response = await createThreadCommentReaction(threadId, commentId, {
+      type: type,
+    });
+    if (response.request.status === 200) {
+
+        let currentComment = comments.find(val => val.id === commentId);
+        let currentCommentReaction = currentComment.reaction.find(val => val.type === type);
+        const findCurrentUserId = currentComment.reaction.find(val => val.user_id.includes(userData.id));
+        const findIndexReaction = currentComment.reaction.indexOf(findCurrentUserId);
+        if (currentCommentReaction){
+            currentCommentReaction.total = response.data.total;
+            currentComment.reaction.splice(findIndexReaction, 1);
+        } else {
+            currentComment.reaction[findIndexReaction] = response.data;
+            setCommentLimit(commentLimit + 1);
+        }
+
+    } else {
+        alert('Opps, Something went wrong. Please try again');
+    }
+
   };
 
   return {
@@ -64,6 +79,8 @@ const useDetailThread = threadId => {
     comment,
     setComment,
     handleSendComment,
+    loadingSend,
+    handleReactionThread,
   };
 };
 

@@ -20,6 +20,8 @@ const DetailThread = ({route, navigation}) => {
     comment,
     setComment,
     handleSendComment,
+    loadingSend,
+    handleReactionThread,
   } = useDetailThread(thread.id);
 
   return (
@@ -28,7 +30,12 @@ const DetailThread = ({route, navigation}) => {
       <FlatList
         data={comments}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({item, index}) => <CommentCard data={item} />}
+        renderItem={({item, index}) => (
+          <CommentCard
+            onReaction={val => handleReactionThread(val, item.id)}
+            data={item}
+          />
+        )}
         ListHeaderComponent={
           <>
             <ThreadCard
@@ -55,6 +62,7 @@ const DetailThread = ({route, navigation}) => {
       <CommentInput
         onChangeText={val => setComment(val)}
         value={comment}
+        loading={loadingSend}
         onSend={() => handleSendComment()}
       />
     </Container>
