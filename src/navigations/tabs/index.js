@@ -6,20 +6,28 @@ import {Home, Topic, Thread, Profile} from 'scenes';
 import {Colors} from 'styles';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const {width} = Dimensions.get('window');
+import {useSelector} from 'react-redux';
 
-const ProfileIcon = ({focused}) => (
-  <View
-    style={{
-      borderWidth: 2,
-      borderColor: focused ? Colors.PRIMARY : Colors.PRIMARY_MATE,
-      borderRadius: 75,
-    }}>
-    <Image
-      source={require('assets/profile.jpeg')}
-      style={{width: width * 0.065, height: width * 0.065, borderRadius: 75}}
-    />
-  </View>
-);
+const ProfileIcon = ({focused}) => {
+  const userData = useSelector(state => state.user.data);
+  return (
+    <View
+      style={{
+        borderWidth: 2,
+        borderColor: focused ? Colors.PRIMARY : Colors.PRIMARY_MATE,
+        borderRadius: 75,
+      }}>
+      <Image
+        source={{
+          uri: userData?.avatar
+            ? userData.avatar
+            : 'https://www.unmc.edu/cihc/_images/faculty/default.jpg',
+        }}
+        style={{width: width * 0.065, height: width * 0.065, borderRadius: 75}}
+      />
+    </View>
+  );
+};
 
 const TabIcon = ({routeName, focused}) => {
   let iconFile = Icons.find(val => val.key === routeName);

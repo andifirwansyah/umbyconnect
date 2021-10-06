@@ -28,10 +28,10 @@ const configureStore = () => {
 
 const getAsyncStorage = () => {
   return dispatch => {
-    AsyncStorage.getItem('userToken').then(userToken => {
+    AsyncStorage.getItem('userToken').then(async userToken => {
       dispatch(signIn(userToken));
       if (userToken) {
-        getCurrentUser()
+        await getCurrentUser()
           .then(resp => {
             dispatch(storeUserProfile(resp.data));
             console.log('STORE => user data');

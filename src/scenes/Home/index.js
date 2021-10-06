@@ -22,7 +22,10 @@ const Home = ({navigation}) => {
     isFetching,
   } = useHome();
   return (
-    <Container backgroundColor={Colors.WHITE_MEDIUM} barStyle="dark-content">
+    <Container
+      backgroundColor={Colors.WHITE_MEDIUM}
+      barStyle="dark-content"
+      barColor={Colors.WHITE}>
       <Header
         showSearch={true}
         showNotification={true}

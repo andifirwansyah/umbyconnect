@@ -18,7 +18,7 @@ const ModalQRCode = props => {
       backdropTransitionInTiming={50}
       backdropTransitionOutTiming={50}
       swipeDirection="down"
-      onSwipeComplete={() => alert('ok')}
+      onSwipeComplete={onClose}
       animationIn="slideInUp"
       animationInTiming={300}
       hideModalContentWhileAnimating={true}

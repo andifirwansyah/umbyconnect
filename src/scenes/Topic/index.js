@@ -15,7 +15,10 @@ import useTopic from './useTopic';
 const Topic = ({navigation}) => {
   const {loading, topics, handleRefreshData, isFetching} = useTopic();
   return (
-    <Container backgroundColor={Colors.WHITE_MEDIUM} barStyle="dark-content">
+    <Container
+      backgroundColor={Colors.WHITE_MEDIUM}
+      barStyle="dark-content"
+      barColor={Colors.WHITE}>
       <Header
         lgTitle="Topik Menarik"
         showNotification={true}
