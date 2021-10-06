@@ -7,6 +7,7 @@ import DetailThread from './DetailThread';
 import Topic from './Topic';
 import Thread from './Thread';
 import FriendProfile from './FriendProfile';
+import Profile from './Profile';
 
 export {
   SignIn,
@@ -18,4 +19,5 @@ export {
   Topic,
   Thread,
   FriendProfile,
+  Profile,
 };

@@ -9,11 +9,14 @@ import {
   FlatList,
   LogBox,
   ActivityIndicator,
+  ImageBackground,
+  StatusBar,
 } from 'react-native';
-import {Container, Icon, ThreadCard} from 'components';
+import {ModalQRCode, Icon, ThreadCard} from 'components';
 import {Colors} from 'styles';
 import styles from './styles';
 import useFriendProfile from './useFriendProfile';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const FriendProfile = ({route, navigation}) => {
   const {
@@ -24,6 +27,8 @@ const FriendProfile = ({route, navigation}) => {
     loadingThreads,
     handleFollow,
     isFollowing,
+    showQRCode,
+    setShowQRCode,
   } = useFriendProfile(route, navigation,);
   const yearClass = profile?.year_class ? profile.year_class : '---';
 
@@ -38,10 +43,7 @@ const FriendProfile = ({route, navigation}) => {
   };
 
   return (
-    <Container
-      backgroundColor={Colors.WHITE_MEDIUM}
-      barColor={Colors.WHITE_MEDIUM}
-      barStyle="dark-content">
+    <SafeAreaProvider style={{flex: 1}}>
       <ScrollView
         onScroll={({nativeEvent}) => {
           if (isCloseToBottom(nativeEvent)) {
@@ -49,7 +51,8 @@ const FriendProfile = ({route, navigation}) => {
           }
         }}
         scrollEventThrottle={400}>
-        <View style={styles.header}>
+        <ImageBackground source={{uri: profile.avatar}} blurRadius={20} style={styles.header}>
+        <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
           <View style={styles.headerSection}>
             <View style={styles.headerLeft}>
               <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -70,7 +73,7 @@ const FriendProfile = ({route, navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
-        </View>
+        </ImageBackground>
         <View style={styles.profileInfoSection}>
           <View style={styles.profileInfoWrap}>
             <View style={styles.avatarSection}>
@@ -99,7 +102,7 @@ const FriendProfile = ({route, navigation}) => {
                 )}
                 <Text style={styles.btnFollowTitle(isFollowing)}>{isFollowing ? 'Batal Mengikuti' : 'Ikuti'}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.btnChat}>
+              <TouchableOpacity style={styles.btnChat} onPress={() => setShowQRCode(true)}>
                 <Icon
                   name="qrcode"
                   type="AntDesign"
@@ -162,8 +165,8 @@ const FriendProfile = ({route, navigation}) => {
               renderItem={({item, index}) => (
                 <ThreadCard
                   data={item}
-                  goDetail={() => navigation.navigate('DetailThread')}
-                  goProfile={() => navigation.navigate('FriendProfile')}
+                  goDetail={() => navigation.navigate('DetailThread', {thread: item})}
+                  disableProfile={true}
                 />
               )}
             />
@@ -171,7 +174,13 @@ const FriendProfile = ({route, navigation}) => {
           </View>
         </View>
       </ScrollView>
-    </Container>
+      <ModalQRCode
+        isVisible={showQRCode}
+        username={profile.username}
+        onScan={() => alert('navigate to scan scene')}
+        onClose={() => setShowQRCode(false)}
+      />
+    </SafeAreaProvider>
   );
 };
 

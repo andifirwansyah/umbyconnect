@@ -15,6 +15,7 @@ const useFriendProfile = (route, navigation) => {
   const [threadsLimit, setThreadsLimit] = useState(5);
   const [loadingThreads, setLoadingThreads] = useState(true);
   const [isFollowing, setFollowing] = useState(false);
+  const [showQRCode, setShowQRCode] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -73,6 +74,8 @@ const useFriendProfile = (route, navigation) => {
     loadingThreads,
     handleFollow,
     isFollowing,
+    showQRCode,
+    setShowQRCode,
   };
 };
 

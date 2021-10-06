@@ -4,7 +4,7 @@ import {getTopics} from 'utils';
 const useTopic = () => {
   const [loading, setLoading] = useState(true);
   const [topics, setTopics] = useState([]);
-  const [isFetching, setFetching] = useState(true);
+  const [isFetching, setFetching] = useState(false);
   useEffect(() => {
     (async () => {
       handleGetTopics();

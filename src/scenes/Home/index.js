@@ -18,6 +18,8 @@ const Home = ({navigation}) => {
     sortThread,
     handleSortThreads,
     handleLoadMoreThreads,
+    handleRefreshData,
+    isFetching,
   } = useHome();
   return (
     <Container backgroundColor={Colors.WHITE_MEDIUM} barStyle="dark-content">
@@ -59,8 +61,9 @@ const Home = ({navigation}) => {
           )
         }
         onEndReached={() => handleLoadMoreThreads()}
+        refreshing={isFetching}
+        onRefresh={() => handleRefreshData()}
       />
-      {/* {loading && <ActivityIndicator size="small" color={Colors.PRIMARY} />} */}
     </Container>
   );
 };

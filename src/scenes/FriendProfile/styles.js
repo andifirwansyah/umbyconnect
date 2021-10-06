@@ -5,8 +5,9 @@ const {width} = Dimensions.get('window');
 
 export default StyleSheet.create({
   header: {
-    height: width * 0.16,
+    height: width * 0.27,
     backgroundColor: 'transparent',
+    zIndex: 0,
   },
   headerSection: {
     flex: 1,
@@ -19,12 +20,15 @@ export default StyleSheet.create({
   },
   headerLeftIcon: {
     fontSize: RFValue(22),
+    color: Colors.WHITE,
   },
   headerRightIcon: {
     fontSize: RFValue(22),
+    color: Colors.WHITE,
   },
   profileInfoSection: {
     flex: 1,
+    zIndex: 1,
     backgroundColor: Colors.WHITE,
     borderTopLeftRadius: width * 0.07,
     borderTopRightRadius: width * 0.07,
@@ -36,6 +40,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
     elevation: 10,
+    marginTop: -width * 0.06,
   },
   profileInfoWrap: {
     alignItems: 'center',

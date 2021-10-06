@@ -4,6 +4,7 @@ import {getThreads} from 'utils';
 
 const useHome = () => {
   const [loading, setLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
   const [threads, setThreads] = useState([]);
   const [sortThread, setSortThread] = useState('desc');
   const [threadLimit, setThreadLimit] = useState(10);
@@ -20,6 +21,7 @@ const useHome = () => {
       alert('Oops! Something went wrong');
     }
     setLoading(false);
+    setIsFetching(false);
   };
 
   const handleSortThreads = () => {
@@ -40,12 +42,19 @@ const useHome = () => {
     }
   };
 
+  const handleRefreshData = () => {
+    setIsFetching(true);
+    handleGetThreads();
+  };
+
   return {
     loading,
     threads,
     sortThread,
     handleSortThreads,
     handleLoadMoreThreads,
+    handleRefreshData,
+    isFetching,
   };
 };
 

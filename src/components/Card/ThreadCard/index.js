@@ -5,11 +5,15 @@ import {Icon} from 'components';
 import moment from 'moment';
 
 const ThreadCard = props => {
-  const {goDetail, goProfile, detail, data, commentTotal} = props;
+  const {goDetail, goProfile, detail, data, commentTotal, disableProfile} =
+    props;
   return (
     <View style={styles.container(detail)}>
       <View style={styles.tpHCard}>
-        <TouchableOpacity style={styles.tpHCardInfo} onPress={goProfile}>
+        <TouchableOpacity
+          style={styles.tpHCardInfo}
+          disabled={disableProfile}
+          onPress={goProfile}>
           <Image source={{uri: data.user.avatar}} style={styles.avatar} />
           <View style={styles.tpHCardMiddle}>
             <Text style={styles.fullName}>{data.user.full_name}</Text>
@@ -82,6 +86,7 @@ const ThreadCard = props => {
 
 ThreadCard.defaultProps = {
   detail: false,
+  disableProfile: false,
 };
 
 export default ThreadCard;

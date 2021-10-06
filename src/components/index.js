@@ -6,6 +6,7 @@ import CreateThreadCard from './Card/CreateThreadCard';
 import CommentCard from './Card/CommentCard.js';
 import CommentInput from './CommentInput';
 import ImagePicker from './ImagePicker';
+import ModalQRCode from './ModalQRCode';
 
 export {
   Container,
@@ -16,4 +17,5 @@ export {
   CommentCard,
   CommentInput,
   ImagePicker,
+  ModalQRCode,
 };
