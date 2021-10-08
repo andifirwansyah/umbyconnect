@@ -2,7 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {Platform} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigator from '../tabs';
-import {ChooseAvatar, CreateThread, DetailThread, FriendProfile} from 'scenes';
+import {
+  ChooseAvatar,
+  CreateThread,
+  DetailThread,
+  FriendProfile,
+  EditProfile,
+} from 'scenes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
@@ -26,6 +32,7 @@ const AppStack = () => {
         <Stack.Screen name="Main" component={TabNavigator} />
         <Stack.Screen name="DetailThread" component={DetailThread} />
         <Stack.Screen name="FriendProfile" component={FriendProfile} />
+        <Stack.Screen name="EditProfile" component={EditProfile} />
       </Stack.Group>
       <Stack.Group
         screenOptions={{

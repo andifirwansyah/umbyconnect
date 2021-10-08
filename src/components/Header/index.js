@@ -14,6 +14,8 @@ const Header = props => {
     lgTitle,
     smTitleIcon,
     sortType,
+    editable,
+    onGoBack,
   } = props;
   return (
     <View style={styles.container}>
@@ -36,7 +38,7 @@ const Header = props => {
             <View style={styles.flexLeftArrow}>
               <TouchableOpacity
                 style={styles.btnRightIconSection}
-                onPress={() => props.navigation.goBack()}>
+                onPress={editable ? onGoBack : () => props.navigation.goBack()}>
                 <Icon
                   name="arrow-left"
                   type="Feather"
@@ -110,6 +112,7 @@ Header.defaultProps = {
   showShare: false,
   smTitle: '',
   lgTitle: '',
+  editable: false,
 };
 
 export default Header;

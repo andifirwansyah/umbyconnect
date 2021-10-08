@@ -150,6 +150,10 @@ const Profile = ({navigation}) => {
           isVisible={modalFillProfile}
           onCancel={() => handleGoBack()}
           navigation={navigation}
+          onAccept={() => {
+            setModalFillProfile(!modalFillProfile);
+            navigation.navigate('EditProfile');
+          }}
           message={
             'Dengan melengkapi profil kamu, kami dapat membantu membuat rekomendasi thread yang menarik untuk kamu'
           }

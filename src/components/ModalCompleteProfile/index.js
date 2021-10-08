@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import Modal from 'react-native-modal';
 import styles from './styles';
 
-const ModalCompleteProfile = ({navigation, onCancel, isVisible, message}) => {
+const ModalCompleteProfile = ({onAccept, onCancel, isVisible, message}) => {
   return (
     <Modal
       isVisible={isVisible}
@@ -30,9 +30,7 @@ const ModalCompleteProfile = ({navigation, onCancel, isVisible, message}) => {
               Silakan lengkapi profil kamu.
             </Text>
             <Text style={styles.modalDescription}>{message}</Text>
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={() => navigation.navigate('EditProfile')}>
+            <TouchableOpacity style={styles.modalButton} onPress={onAccept}>
               <Text style={styles.modalButtonTitle}>Lengkapi Sekarang!</Text>
             </TouchableOpacity>
             <TouchableOpacity

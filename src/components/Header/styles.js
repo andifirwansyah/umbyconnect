@@ -7,7 +7,16 @@ export default StyleSheet.create({
   container: {
     height: width * 0.16,
     backgroundColor: Colors.WHITE,
-    elevation: 2,
+    // elevation: 2,
+    shadowColor: Colors.PRIMARY,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   section: {
     flex: 1,

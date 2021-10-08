@@ -74,6 +74,10 @@ const Home = ({navigation}) => {
         isVisible={modalCompletion}
         onCancel={() => setModalCompletion(false)}
         navigation={navigation}
+        onAccept={() => {
+          setModalCompletion(!modalCompletion);
+          navigation.navigate('EditProfile');
+        }}
         message="Saat ini kamu belum dapat membuat thread, Mohon lengkapi profil kamu terlebih dahulu dan kembali lagi."
       />
     </Container>
