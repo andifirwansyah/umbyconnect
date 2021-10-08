@@ -2,10 +2,10 @@ import React from 'react';
 import {View, Text, ActivityIndicator, FlatList} from 'react-native';
 import {
   Container,
-  Icon,
   Header,
   ThreadCard,
   CreateThreadCard,
+  ModalCompleteProfile,
 } from 'components';
 import {Colors} from 'styles';
 import styles from './styles';
@@ -21,6 +21,8 @@ const Home = ({navigation}) => {
     handleRefreshData,
     isFetching,
     handleNavigateCreateThread,
+    modalCompletion,
+    setModalCompletion,
   } = useHome(navigation);
 
   return (
@@ -67,6 +69,12 @@ const Home = ({navigation}) => {
         onEndReached={() => handleLoadMoreThreads()}
         refreshing={isFetching}
         onRefresh={() => handleRefreshData()}
+      />
+      <ModalCompleteProfile
+        isVisible={modalCompletion}
+        onCancel={() => setModalCompletion(false)}
+        navigation={navigation}
+        message="Saat ini kamu belum dapat membuat thread, Mohon lengkapi profil kamu terlebih dahulu dan kembali lagi."
       />
     </Container>
   );

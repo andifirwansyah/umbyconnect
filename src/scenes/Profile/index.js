@@ -12,13 +12,13 @@ import {
   StatusBar,
   LogBox,
 } from 'react-native';
-import {ModalQRCode, Icon, ThreadCard} from 'components';
+import {Icon, ThreadCard, ModalCompleteProfile} from 'components';
 import {Colors} from 'styles';
 import styles from './styles';
-import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import useProfile from './useProfile';
 import {useIsFocused} from '@react-navigation/native';
-import Modal from 'react-native-modal';
+
 const Profile = ({navigation}) => {
   const isFocused = useIsFocused();
   const {userdata, loading, threads} = useProfile();
@@ -146,37 +146,15 @@ const Profile = ({navigation}) => {
             )}
           </View>
         </View>
+        <ModalCompleteProfile
+          isVisible={modalFillProfile}
+          onCancel={() => handleGoBack()}
+          navigation={navigation}
+          message={
+            'Dengan melengkapi profil kamu, kami dapat membantu membuat rekomendasi thread yang menarik untuk kamu'
+          }
+        />
       </ScrollView>
-      <Modal isVisible={modalFillProfile} style={styles.modalContainer}>
-        <View style={styles.modalSection}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalTitleSection}>
-              <Text style={styles.modalTitle}>Profil Kamu Belum Lengkap</Text>
-            </View>
-            <View style={styles.modalContentSection}>
-              <Image
-                source={require('assets/disappointed.png')}
-                style={styles.modalIcon}
-              />
-              <Text style={styles.modalSubTitle}>
-                Silakan lengkapi profil kamu.
-              </Text>
-              <Text style={styles.modalDescription}>
-                Dengan melengkapi profil kamu, kami dapat membantu membuat
-                rekomendasi thread yang menarik untuk kamu
-              </Text>
-              <TouchableOpacity style={styles.modalButton}>
-                <Text style={styles.modalButtonTitle}>Lengkapi Sekarang!</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.modalButtonCancel}
-                onPress={() => handleGoBack()}>
-                <Text style={styles.modalButtonCancelTitle}>Nanti Aja!</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
     </SafeAreaProvider>
   );
 };

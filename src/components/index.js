@@ -7,6 +7,7 @@ import CommentCard from './Card/CommentCard.js';
 import CommentInput from './CommentInput';
 import ImagePicker from './ImagePicker';
 import ModalQRCode from './ModalQRCode';
+import ModalCompleteProfile from './ModalCompleteProfile';
 
 export {
   Container,
@@ -18,4 +19,5 @@ export {
   CommentInput,
   ImagePicker,
   ModalQRCode,
+  ModalCompleteProfile,
 };

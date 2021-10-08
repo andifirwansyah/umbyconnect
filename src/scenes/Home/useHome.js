@@ -7,11 +7,14 @@ import {setLocalThreads} from 'actions';
 
 const useHome = navigation => {
   const localThreads = useSelector(state => state.threads.data);
+  const userData = useSelector(state => state.user.data);
   const [loading, setLoading] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
   const [threads, setThreads] = useState(localThreads);
   const [sortThread, setSortThread] = useState('desc');
   const [threadLimit, setThreadLimit] = useState(10);
+  const [modalCompletion, setModalCompletion] = useState(false);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,13 +57,17 @@ const useHome = navigation => {
   };
 
   const handleNavigateCreateThread = () => {
-    navigation.navigate('CreateThread', {
-      newThread: thread => {
-        const newThreads = [thread].concat(threads);
-        dispatch(setLocalThreads(newThreads));
-        setThreads(newThreads);
-      },
-    });
+    if (!userData.full_name) {
+      setModalCompletion(true);
+    } else {
+      navigation.navigate('CreateThread', {
+        newThread: thread => {
+          const newThreads = [thread].concat(threads);
+          dispatch(setLocalThreads(newThreads));
+          setThreads(newThreads);
+        },
+      });
+    }
   };
 
   return {
@@ -72,6 +79,8 @@ const useHome = navigation => {
     handleRefreshData,
     isFetching,
     handleNavigateCreateThread,
+    modalCompletion,
+    setModalCompletion,
   };
 };
 
