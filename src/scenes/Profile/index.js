@@ -57,7 +57,8 @@ const Profile = ({navigation}) => {
           />
           <View style={styles.headerSection}>
             <View style={styles.headerLeft}>
-              <TouchableOpacity onPress={() => navigation.goBack()}>
+              <TouchableOpacity
+                onPress={() => alert('Status has change to offline')}>
                 <Icon
                   name="online-prediction"
                   type="MaterialIcons"
@@ -66,7 +67,7 @@ const Profile = ({navigation}) => {
               </TouchableOpacity>
             </View>
             <View style={styles.headerRight}>
-              <TouchableOpacity onPress={() => alert('Reported!')}>
+              <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
                 <Icon
                   name="setting"
                   type="AntDesign"
@@ -81,9 +82,14 @@ const Profile = ({navigation}) => {
             <View style={styles.avatarSection}>
               <Image source={{uri: userdata.avatar}} style={styles.avatar} />
             </View>
-            <Text style={styles.fullName}>{'Andi Firwansyah'}</Text>
-            <Text style={styles.major}>Informatika - 17</Text>
-            <Text style={styles.bio}>Apa urusan anda melihat akun saya?</Text>
+            <Text style={styles.fullName}>
+              {userdata.full_name ? userdata.full_name : 'Nama Lengkap'}
+            </Text>
+            <Text style={styles.major}>
+              {userdata.major ? userdata.major : 'Bidang'} -{' '}
+              {userdata.year_class ? userdata.year_class : '0'}
+            </Text>
+            <Text style={styles.bio}>{userdata.bio ? userdata.bio : '-'}</Text>
             <View style={styles.lastProfileSection}>
               <View style={styles.lastProfileWrap}>
                 <Text style={styles.lastProfileTotal}>

@@ -9,6 +9,7 @@ import Thread from './Thread';
 import FriendProfile from './FriendProfile';
 import Profile from './Profile';
 import EditProfile from './Profile/EditProfile';
+import Setting from './Profile/Setting';
 
 export {
   SignIn,
@@ -22,4 +23,5 @@ export {
   FriendProfile,
   Profile,
   EditProfile,
+  Setting,
 };

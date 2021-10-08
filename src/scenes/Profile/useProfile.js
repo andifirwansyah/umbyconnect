@@ -12,7 +12,6 @@ const useProfile = () => {
   useEffect(() => {
     handleGetThread();
   }, [limit]);
-
   const handleGetThread = async () => {
     const response = await getUserThreads(userdata.id, limit);
     if (response.request.status === 200) {

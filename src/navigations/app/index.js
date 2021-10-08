@@ -8,6 +8,7 @@ import {
   DetailThread,
   FriendProfile,
   EditProfile,
+  Setting,
 } from 'scenes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -33,6 +34,7 @@ const AppStack = () => {
         <Stack.Screen name="DetailThread" component={DetailThread} />
         <Stack.Screen name="FriendProfile" component={FriendProfile} />
         <Stack.Screen name="EditProfile" component={EditProfile} />
+        <Stack.Screen name="Setting" component={Setting} />
       </Stack.Group>
       <Stack.Group
         screenOptions={{
