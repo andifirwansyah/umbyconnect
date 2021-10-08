@@ -20,7 +20,9 @@ const Home = ({navigation}) => {
     handleLoadMoreThreads,
     handleRefreshData,
     isFetching,
-  } = useHome();
+    handleNavigateCreateThread,
+  } = useHome(navigation);
+
   return (
     <Container
       backgroundColor={Colors.WHITE_MEDIUM}
@@ -35,6 +37,7 @@ const Home = ({navigation}) => {
       />
       <FlatList
         data={threads}
+        extraData={threads}
         contentContainerStyle={styles.container}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item, index}) => (
@@ -50,9 +53,7 @@ const Home = ({navigation}) => {
           />
         )}
         ListHeaderComponent={
-          <CreateThreadCard
-            onPress={() => navigation.navigate('CreateThread')}
-          />
+          <CreateThreadCard onPress={() => handleNavigateCreateThread()} />
         }
         ListFooterComponent={
           loading && (

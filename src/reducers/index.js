@@ -4,10 +4,12 @@ import {SIGN_OUT} from 'constants/ActionTypes';
 
 import AuthReducer from './AuthReducer';
 import UserReducer from './UserReducer';
+import ThreadReducer from './ThreadReducer';
 
 const appReducer = combineReducers({
   auth: AuthReducer,
   user: UserReducer,
+  threads: ThreadReducer,
 });
 
 const rootReducer = (state, action) => {

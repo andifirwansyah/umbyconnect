@@ -151,7 +151,7 @@ const Profile = ({navigation}) => {
         <View style={styles.modalSection}>
           <View style={styles.modalContent}>
             <View style={styles.modalTitleSection}>
-              <Text style={styles.modalTitle}>Lengkapi Profil Kamu</Text>
+              <Text style={styles.modalTitle}>Profil Kamu Belum Lengkap</Text>
             </View>
             <View style={styles.modalContentSection}>
               <Image
@@ -159,11 +159,11 @@ const Profile = ({navigation}) => {
                 style={styles.modalIcon}
               />
               <Text style={styles.modalSubTitle}>
-                Silakan lengkapi profil Anda.
+                Silakan lengkapi profil kamu.
               </Text>
               <Text style={styles.modalDescription}>
-                Dengan melengkapi profil kamu, kami dapat membuat rekomendasi
-                thread yang menarik untuk kamu
+                Dengan melengkapi profil kamu, kami dapat membantu membuat
+                rekomendasi thread yang menarik untuk kamu
               </Text>
               <TouchableOpacity style={styles.modalButton}>
                 <Text style={styles.modalButtonTitle}>Lengkapi Sekarang!</Text>

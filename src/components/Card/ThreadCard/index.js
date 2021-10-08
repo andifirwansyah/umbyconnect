@@ -18,7 +18,7 @@ const ThreadCard = props => {
           <View style={styles.tpHCardMiddle}>
             <Text style={styles.fullName}>{data.user.full_name}</Text>
             <Text style={styles.postDate}>
-              {moment(data.created_at).startOf('day').fromNow()}
+              {moment(data.created_at).fromNow()}
             </Text>
           </View>
         </TouchableOpacity>
