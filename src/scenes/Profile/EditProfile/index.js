@@ -7,14 +7,29 @@ import {
   TextInput,
   ScrollView,
   Alert,
+  Pressable,
 } from 'react-native';
-import {Container, Header, Icon} from 'components';
+import {Container, Header, Icon, ModalSelection} from 'components';
 import {Colors} from 'styles';
 import styles from './styles';
 import useEditProfile from './useEditProfile';
-
+import {Picker} from '@react-native-picker/picker';
+const currentYear = new Date().getFullYear();
+const GENDER = ['Laki-Laki', 'Perempuan'];
 const EditProfile = ({navigation}) => {
-  const {userData} = useEditProfile();
+  const {
+    userData,
+    faculty,
+    setFaculty,
+    handleSaveFaculty,
+    major,
+    setMajor,
+    handleSaveMajor,
+    yearClass,
+    setYearClass,
+    gender,
+    setGender,
+  } = useEditProfile();
   const handleGoBack = () => {
     Alert.alert('Peringatan', 'Apakah kamu ingin menyimpan perubahan?', [
       {
@@ -25,6 +40,19 @@ const EditProfile = ({navigation}) => {
       {text: 'OK', onPress: () => navigation.goBack()},
     ]);
   };
+
+  const options = [];
+  for (let i = 0; i <= 4; i++) {
+    let yearLable = currentYear - i;
+    options.push(
+      <Picker.Item
+        label={yearLable.toString()}
+        key={i}
+        value={currentYear - i}
+      />,
+    );
+  }
+
   return (
     <Container backgroundColor={Colors.WHITE_MEDIUM} barStyle="dark-content">
       <Header
@@ -73,41 +101,57 @@ const EditProfile = ({navigation}) => {
               <Text style={styles.inputLabel}>
                 Fakultas <Text style={{color: Colors.DANGER}}>*</Text>
               </Text>
-              <TextInput
-                style={styles.input}
-                value={userData.faculty}
-                underlineColorAndroid={Colors.GRAY_LIGHT100}
-              />
+              <Pressable onPress={() => setFaculty({...faculty, modal: true})}>
+                <TextInput
+                  style={styles.input}
+                  value={userData.faculty}
+                  editable={false}
+                  underlineColorAndroid={Colors.GRAY_LIGHT100}
+                />
+              </Pressable>
             </View>
             <View style={styles.inputItem}>
               <Text style={styles.inputLabel}>
                 Jurusan/Bidang <Text style={{color: Colors.DANGER}}>*</Text>
               </Text>
-              <TextInput
-                style={styles.input}
-                value={userData.major}
-                underlineColorAndroid={Colors.GRAY_LIGHT100}
-              />
+              <Pressable onPress={() => setMajor({...major, modal: true})}>
+                <TextInput
+                  style={styles.input}
+                  value={userData.major}
+                  editable={false}
+                  underlineColorAndroid={Colors.GRAY_LIGHT100}
+                />
+              </Pressable>
             </View>
             <View style={styles.inputItem}>
               <Text style={styles.inputLabel}>
                 Tahun Angkatan <Text style={{color: Colors.DANGER}}>*</Text>
               </Text>
-              <TextInput
-                style={styles.input}
-                value={userData.year_class}
-                underlineColorAndroid={Colors.GRAY_LIGHT100}
-              />
+              <View style={styles.inputPickerItem}>
+                <Picker
+                  selectedValue={yearClass}
+                  style={styles.inputPicker}
+                  onValueChange={value => setYearClass(value)}>
+                  {options}
+                </Picker>
+              </View>
             </View>
             <View style={styles.inputItem}>
               <Text style={styles.inputLabel}>Jenis Kelamin</Text>
-              <TextInput
-                style={styles.input}
-                value={userData.year_class}
-                underlineColorAndroid={Colors.GRAY_LIGHT100}
-              />
+              <View style={styles.inputPickerItem}>
+                <Picker
+                  selectedValue={gender}
+                  style={styles.inputPicker}
+                  onValueChange={value => setGender(value)}>
+                  {GENDER.map((item, index) => (
+                    <Picker.Item label={item} key={index} value={item} />
+                  ))}
+                </Picker>
+              </View>
             </View>
-            <Text style={styles.userInfoLabel}>Informasi akun kamu</Text>
+            <Text style={[styles.userInfoLabel, {marginTop: 20}]}>
+              Informasi akun kamu
+            </Text>
             <View style={styles.inputItem}>
               <Text style={styles.inputLabel}>
                 Alamat Email <Text style={{color: Colors.DANGER}}>*</Text>
@@ -135,6 +179,16 @@ const EditProfile = ({navigation}) => {
           <Text style={styles.buttonSaveTitle}>Simpan Perubahan</Text>
         </TouchableOpacity>
       </View>
+      <ModalSelection
+        data={faculty.data}
+        isVisible={faculty.modal}
+        onSelected={val => handleSaveFaculty(val)}
+      />
+      <ModalSelection
+        data={major.data}
+        isVisible={major.modal}
+        onSelected={val => handleSaveMajor(val)}
+      />
     </Container>
   );
 };

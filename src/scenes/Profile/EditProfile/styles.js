@@ -82,6 +82,14 @@ export default StyleSheet.create({
     marginTop: -width * 0.02,
     paddingBottom: width * 0.03,
   },
+  inputPickerItem: {
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.GRAY_LIGHT100,
+    marginLeft: width * 0.01,
+  },
+  inputPicker: {
+    marginLeft: -width * 0.03,
+  },
   buttonSaveSection: {
     paddingHorizontal: width * 0.06,
     paddingVertical: width * 0.03,

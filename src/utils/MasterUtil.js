@@ -7,3 +7,13 @@ export const getDefaultAvatar = () => {
 export const getTopics = () => {
   return apiGet(`${PROD_HOST}/v1/master/topics`);
 };
+
+export const getFaculty = code => {
+  let url = '';
+  if (code) {
+    url = `${PROD_HOST}/v1/master/faculty?code=${code}`;
+  } else {
+    url = `${PROD_HOST}/v1/master/faculty`;
+  }
+  return apiGet(url);
+};

@@ -8,6 +8,7 @@ import CommentInput from './CommentInput';
 import ImagePicker from './ImagePicker';
 import ModalQRCode from './ModalQRCode';
 import ModalCompleteProfile from './ModalCompleteProfile';
+import ModalSelection from './ModalSelection';
 
 export {
   Container,
@@ -20,4 +21,5 @@ export {
   ImagePicker,
   ModalQRCode,
   ModalCompleteProfile,
+  ModalSelection,
 };

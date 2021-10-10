@@ -43,6 +43,12 @@ const MENU_LIST = [
     route: '',
   },
   {
+    key: 5,
+    name: 'Dukungan/Donasi',
+    icon: require('assets/menu-icon/review.png'),
+    route: '',
+  },
+  {
     key: 6,
     name: 'Keluar',
     icon: require('assets/menu-icon/logout.png'),
