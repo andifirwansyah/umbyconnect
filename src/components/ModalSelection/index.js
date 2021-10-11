@@ -5,7 +5,7 @@ import {Colors} from 'styles';
 import styles from './styles';
 const {width, height} = Dimensions.get('window');
 
-const ModalSelection = ({data, isVisible, onSelected}) => {
+const ModalSelection = ({data, isVisible, onSelected, title, onClose}) => {
   const handleSelectedItem = item => {
     onSelected(item);
   };
@@ -19,10 +19,11 @@ const ModalSelection = ({data, isVisible, onSelected}) => {
       useNativeDriver={true}
       useNativeDriverForBackdrop={true}
       propagateSwipe={true}
+      onBackdropPress={onClose}
       style={styles.container}>
       <View style={styles.section}>
         <View style={styles.content}>
-          <Text style={styles.contentTitle}>PILIH FAKULTAS</Text>
+          <Text style={styles.contentTitle}>{`PILIH ${title}`}</Text>
           <FlatList
             data={data}
             keyExtractor={(item, index) => index.toString()}

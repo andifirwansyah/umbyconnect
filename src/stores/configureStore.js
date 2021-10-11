@@ -12,7 +12,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const persistConfig = {
   key: 'root',
   blacklist: [],
-  whitelist: ['auth'],
+  whitelist: ['auth', 'user'],
   keyPrefix: appName,
   storage: AsyncStorage,
 };

@@ -18,32 +18,36 @@ import styles from './styles';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import useProfile from './useProfile';
 import {useIsFocused} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = ({navigation}) => {
   const isFocused = useIsFocused();
-  const {userdata, loading, threads} = useProfile();
+  const {userdata, loading, threads, setLimit} = useProfile();
   const [modalFillProfile, setModalFillProfile] = useState(false);
   const yearClass = userdata?.year_class ? userdata.year_class : '---';
-
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, []);
-
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      if (!userdata.full_name) {
+    const unsubscribe = navigation.addListener('focus', async () => {
+      const profileCompletion = await AsyncStorage.getItem('profileCompletion');
+      if (profileCompletion === 'true') {
+        setModalFillProfile(false);
+      } else {
         setModalFillProfile(true);
       }
+      setLimit(11);
     });
-
     return unsubscribe;
   }, [navigation]);
+
   const handleGoBack = () => {
     setModalFillProfile(!modalFillProfile);
     setTimeout(() => {
       navigation.goBack();
     }, 100);
   };
+
   return (
     <SafeAreaProvider style={{flex: 1}}>
       <ScrollView>
@@ -119,6 +123,7 @@ const Profile = ({navigation}) => {
             </View>
             <FlatList
               data={threads}
+              extraData={threads}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({item, index}) => (
                 <ThreadCard

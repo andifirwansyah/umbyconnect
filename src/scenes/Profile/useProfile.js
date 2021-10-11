@@ -24,6 +24,8 @@ const useProfile = () => {
     userdata,
     loading,
     threads,
+    setThreads,
+    setLimit,
   };
 };
 

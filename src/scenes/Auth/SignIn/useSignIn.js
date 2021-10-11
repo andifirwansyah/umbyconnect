@@ -21,6 +21,7 @@ const useSignIn = () => {
     });
     if (response.request.status === 200) {
       await AsyncStorage.setItem('userToken', response.data.access_token);
+      await AsyncStorage.setItem('profileCompletion', response.data.completion);
       dispatch(signIn(response.data.access_token));
     } else {
       setError(response.response.data.message);

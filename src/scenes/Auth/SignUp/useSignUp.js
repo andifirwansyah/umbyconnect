@@ -22,6 +22,7 @@ const useSignUp = navigation => {
     });
     if (response.request.status === 201) {
       await AsyncStorage.setItem('userToken', response.data.token);
+      await AsyncStorage.setItem('profileCompletion', false);
       dispatch(signIn(response.data.token));
       dispatch(storeUserProfile(response.data.userdata));
     } else {

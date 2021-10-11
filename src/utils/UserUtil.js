@@ -31,3 +31,7 @@ export const getUserThreads = (userId, limit) => {
 export const followUser = userId => {
   return apiGet(`${PROD_HOST}/v1/profile/${userId}/follow`);
 };
+
+export const updateProfile = data => {
+  return apiPost(`${PROD_HOST}/v1/profile/update`, data);
+};
