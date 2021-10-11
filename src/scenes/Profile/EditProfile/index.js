@@ -32,16 +32,21 @@ const EditProfile = ({navigation}) => {
     setAvatarModal,
     handleUpdateProfile,
     loading,
+    handleCheckDataChanges,
   } = useEditProfile(navigation);
   const handleGoBack = () => {
-    Alert.alert('Peringatan', 'Apakah kamu ingin menyimpan perubahan?', [
-      {
-        text: 'Batal',
-        onPress: () => navigation.goBack(),
-        style: 'cancel',
-      },
-      {text: 'OK', onPress: () => navigation.goBack()},
-    ]);
+    if (handleCheckDataChanges()) {
+      Alert.alert('Peringatan', 'Apakah kamu ingin menyimpan perubahan?', [
+        {
+          text: 'Tidak',
+          onPress: () => navigation.goBack(),
+          style: 'cancel',
+        },
+        {text: 'YA', onPress: () => handleUpdateProfile()},
+      ]);
+    } else {
+      navigation.goBack();
+    }
   };
 
   const options = [];
@@ -216,7 +221,8 @@ const EditProfile = ({navigation}) => {
       </ScrollView>
       <View style={styles.buttonSaveSection}>
         <TouchableOpacity
-          style={styles.buttonSave}
+          style={styles.buttonSave(handleCheckDataChanges())}
+          disabled={handleCheckDataChanges() ? false : true}
           onPress={() => handleUpdateProfile()}>
           {loading ? (
             <ActivityIndicator size="small" color={Colors.WHITE} />

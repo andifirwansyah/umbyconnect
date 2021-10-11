@@ -74,6 +74,10 @@ const useEditProfile = navigation => {
   };
 
   const handleUpdateProfile = async () => {
+    if (isInputEmpty()) {
+      alert('Mohon lengkapi form yang telah disediakan!');
+      return;
+    }
     setLoading(true);
     let avatarUpload = '';
     if (!data.avatar?.uri) {
@@ -116,8 +120,35 @@ const useEditProfile = navigation => {
     );
   };
 
+  const isInputEmpty = () => {
+    return !(
+      data.full_name &&
+      data.username &&
+      data.avatar &&
+      data.faculty &&
+      data.major &&
+      data.year_class &&
+      data.gender
+    );
+  };
+
+  const handleCheckDataChanges = () => {
+    if (
+      userData.full_name !== data.full_name ||
+      userData.username !== data.username ||
+      userData.avatar !== data.avatar ||
+      userData.faculty !== data.faculty ||
+      userData.major !== data.major ||
+      userData.year_class !== data.year_class ||
+      userData.gender !== data.gender
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return {
-    userData,
     faculty,
     setFaculty,
     major,
@@ -134,6 +165,7 @@ const useEditProfile = navigation => {
     setAvatarModal,
     handleUpdateProfile,
     loading,
+    handleCheckDataChanges,
   };
 };
 

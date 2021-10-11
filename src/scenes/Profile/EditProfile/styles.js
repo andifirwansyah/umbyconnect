@@ -103,13 +103,14 @@ export default StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 20,
   },
-  buttonSave: {
+  buttonSave: isDataChanges => ({
     backgroundColor: Colors.PRIMARY,
+    opacity: isDataChanges ? 1 : 0.5,
     height: width * 0.11,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: width * 0.046,
-  },
+  }),
   buttonSaveTitle: {
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
     fontSize: RFValue(14),
