@@ -25,6 +25,7 @@ const Home = ({navigation}) => {
     setModalCompletion,
     handleCreateReaction,
     stateChanged,
+    handleNavigateThreadDetail,
   } = useHome(navigation);
 
   return (
@@ -48,7 +49,7 @@ const Home = ({navigation}) => {
         renderItem={({item, index}) => (
           <ThreadCard
             data={item}
-            goDetail={() => navigation.navigate('DetailThread', {thread: item})}
+            goDetail={() => handleNavigateThreadDetail(item)}
             onReaction={val => handleCreateReaction(val)}
             goProfile={() =>
               navigation.navigate('FriendProfile', {

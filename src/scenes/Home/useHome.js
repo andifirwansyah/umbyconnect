@@ -80,6 +80,22 @@ const useHome = navigation => {
     }
   };
 
+  const handleNavigateThreadDetail = item => {
+    navigation.navigate('DetailThread', {
+      thread: item,
+      totalView: total => {
+        const thread = threads.find(val => val.id === item.id);
+        thread.total_view = total;
+        setStateChanged(stateChanged => [...stateChanged, thread]);
+      },
+      totalComment: total => {
+        const thread = threads.find(val => val.id === item.id);
+        thread.total_comment = total;
+        setStateChanged(stateChanged => [...stateChanged, thread]);
+      },
+    });
+  };
+
   return {
     loading,
     threads,
@@ -93,6 +109,7 @@ const useHome = navigation => {
     setModalCompletion,
     handleCreateReaction,
     stateChanged,
+    handleNavigateThreadDetail,
   };
 };
 

@@ -8,7 +8,7 @@ import {
   updateThreadLog,
 } from 'utils';
 import {useSelector} from 'react-redux';
-const useDetailThread = threadId => {
+const useDetailThread = (totalView, totalComment, threadId) => {
   const userData = useSelector(state => state.user.data);
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]); // all comment from database
@@ -25,6 +25,7 @@ const useDetailThread = threadId => {
     const response = await getThreadComment(threadId, commentLimit);
     if (response.request.status === 200) {
       setComments(response.data);
+      totalComment(response.data.length);
     }
     setLoading(false);
   };
@@ -43,6 +44,7 @@ const useDetailThread = threadId => {
     });
     if (response.request.status === 200) {
       setComments(comments => [...comments, response.data]);
+      totalComment(comments.length + 1);
       setComment('');
     } else {
       alert('Oops, Something went wrong. Please try again');
@@ -78,6 +80,7 @@ const useDetailThread = threadId => {
     const response = await updateThreadLog(threadId);
     if (response.request.status === 200){
       console.log(response.data);
+      totalView(response.data.current_view);
     }
   };
 

@@ -14,6 +14,12 @@ const ThreadCard = props => {
     disableProfile,
     onReaction,
   } = props;
+
+  const vFormatter = num => {
+    return Math.abs(num) > 999
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'K'
+      : Math.sign(num) * Math.abs(num);
+  };
   return (
     <View style={styles.container(detail)}>
       <View style={styles.tpHCard}>
@@ -89,7 +95,7 @@ const ThreadCard = props => {
         <View style={styles.totalViewSection}>
           <Image source={require('assets/eye.png')} style={styles.viewIcon} />
           <Text style={styles.totalView}>
-            {data.total_view ? data.total_view : 0}
+            {vFormatter(data.total_view ? data.total_view : 0)}
           </Text>
         </View>
         <View style={styles.totalCommentSection}>

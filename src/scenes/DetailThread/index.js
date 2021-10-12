@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, FlatList, ActivityIndicator} from 'react-native';
+import {View, Text, FlatList, ActivityIndicator, LogBox} from 'react-native';
 import {
   Container,
   Header,
@@ -12,7 +12,7 @@ import {Colors} from 'styles';
 import useDetailThread from './useDetailThread';
 
 const DetailThread = ({route, navigation}) => {
-  const {thread} = route.params;
+  const {thread, totalView, totalComment} = route.params;
   const {
     loading,
     comments,
@@ -22,7 +22,13 @@ const DetailThread = ({route, navigation}) => {
     handleSendComment,
     loadingSend,
     handleReactionThread,
-  } = useDetailThread(thread.id);
+  } = useDetailThread(totalView, totalComment, thread.id);
+
+  React.useEffect(() => {
+    LogBox.ignoreLogs([
+      'Non-serializable values were found in the navigation state',
+    ]);
+  }, []);
 
   return (
     <Container backgroundColor={Colors.WHITE} barStyle="dark-content">
