@@ -88,7 +88,9 @@ const ThreadCard = props => {
         </View>
         <View style={styles.totalViewSection}>
           <Image source={require('assets/eye.png')} style={styles.viewIcon} />
-          <Text style={styles.totalView}>100</Text>
+          <Text style={styles.totalView}>
+            {data.total_view ? data.total_view : 0}
+          </Text>
         </View>
         <View style={styles.totalCommentSection}>
           <Image

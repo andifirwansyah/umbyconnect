@@ -5,6 +5,7 @@ import {
   getThreadComment,
   createThreadComment,
   createThreadCommentReaction,
+  updateThreadLog,
 } from 'utils';
 import {useSelector} from 'react-redux';
 const useDetailThread = threadId => {
@@ -16,10 +17,11 @@ const useDetailThread = threadId => {
   const [loadingSend, setLoadingSend] = useState(false);
 
   useEffect(() => {
-    handleThreadComment();
+    handleGetThreadComment();
+    handleUpdateThreadLogView();
   }, [commentLimit]);
 
-  const handleThreadComment = async () => {
+  const handleGetThreadComment = async () => {
     const response = await getThreadComment(threadId, commentLimit);
     if (response.request.status === 200) {
       setComments(response.data);
@@ -70,6 +72,13 @@ const useDetailThread = threadId => {
         alert('Opps, Something went wrong. Please try again');
     }
 
+  };
+
+  const handleUpdateThreadLogView = async () => {
+    const response = await updateThreadLog(threadId);
+    if (response.request.status === 200){
+      console.log(response.data);
+    }
   };
 
   return {

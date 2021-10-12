@@ -91,6 +91,7 @@ export default StyleSheet.create({
   viewIcon: {
     width: width * 0.05,
     height: width * 0.05,
+    opacity: 0.8,
   },
   totalView: {
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,

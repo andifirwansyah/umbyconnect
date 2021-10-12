@@ -24,3 +24,7 @@ export const createThread = data => {
 export const createThreadReaction = (threadId, type) => {
   return apiPost(`${PROD_HOST}/v1/thread/${threadId}/reaction`, type);
 };
+
+export const updateThreadLog = threadId => {
+  return apiGet(`${PROD_HOST}/v1/thread/${threadId}/log`);
+};
