@@ -36,6 +36,7 @@ const Home = ({navigation}) => {
         showFilterUp={true}
         sortType={sortThread}
         onFilter={() => handleSortThreads()}
+        navigation={navigation}
       />
       <FlatList
         data={threads}

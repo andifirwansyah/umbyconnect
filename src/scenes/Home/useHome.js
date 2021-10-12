@@ -8,7 +8,7 @@ import {setLocalThreads} from 'actions';
 const useHome = navigation => {
   const localThreads = useSelector(state => state.threads.data);
   const userData = useSelector(state => state.user.data);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [threads, setThreads] = useState(localThreads);
   const [sortThread, setSortThread] = useState('desc');
@@ -21,6 +21,7 @@ const useHome = navigation => {
     handleGetThreads();
   }, [threadLimit]);
   const handleGetThreads = async sort => {
+    setLoading(localThreads.length > 0 ? false : true);
     const param = `?order_by=${!sort ? sortThread : sort}&limit=${threadLimit}`;
     const response = await getThreads(param);
     if (response.request.status === 200) {

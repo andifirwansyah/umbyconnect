@@ -59,11 +59,14 @@ const Header = props => {
             <View style={styles.btnSection}>
               <TouchableOpacity
                 style={styles.btnRightIconSection}
-                onPress={props.goNotification}>
+                onPress={() => props.navigation.navigate('Notification')}>
                 <Image
                   source={require('assets/notification.png')}
                   style={styles.btnRightIcon}
                 />
+                <View style={styles.badgeNotificationSection}>
+                  <Text style={styles.badgeNotificationValue}>2</Text>
+                </View>
               </TouchableOpacity>
             </View>
           )}

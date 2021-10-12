@@ -9,7 +9,7 @@ export default StyleSheet.create({
     borderRadius: detail ? 0 : width * 0.03,
     paddingHorizontal: width * 0.03,
     paddingVertical: width * 0.03,
-    marginTop: width * 0.04,
+    marginTop: width * 0.03,
     borderBottomWidth: detail ? 1 : 0,
     borderBottomColor: Colors.GRAY_MEDIUM,
   }),

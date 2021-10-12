@@ -10,6 +10,7 @@ import FriendProfile from './FriendProfile';
 import Profile from './Profile';
 import EditProfile from './Profile/EditProfile';
 import Setting from './Profile/Setting';
+import Notification from './Notification';
 
 export {
   SignIn,
@@ -24,4 +25,5 @@ export {
   Profile,
   EditProfile,
   Setting,
+  Notification,
 };

@@ -93,4 +93,22 @@ export default StyleSheet.create({
     width: width * 0.065,
     height: width * 0.065,
   },
+  badgeNotificationSection: {
+    width: width * 0.055,
+    height: width * 0.055,
+    backgroundColor: Colors.DANGER,
+    borderRadius: 75,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    borderWidth: 2,
+    borderColor: Colors.WHITE,
+  },
+  badgeNotificationValue: {
+    fontFamily: Fonts.ARIAL,
+    color: Colors.WHITE,
+    fontSize: RFValue(10.5),
+  },
 });
