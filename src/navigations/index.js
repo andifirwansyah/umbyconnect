@@ -3,9 +3,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AuthStack from './auth';
 import AppStack from './app';
-import {View, ActivityIndicator} from 'react-native';
 import {Colors} from 'styles';
 import {useSelector} from 'react-redux';
+import AnimatedSplash from 'react-native-animated-splash-screen';
 
 const RootStack = createNativeStackNavigator();
 const RootStackNavigation = ({userToken}) => (
@@ -18,29 +18,27 @@ const RootStackNavigation = ({userToken}) => (
   </RootStack.Navigator>
 );
 
-export const Splash = () => (
-  <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-    <ActivityIndicator size="large" color={Colors.PRIMARY} />
-  </View>
-);
-
 const RootNavigator = () => {
   const userToken = useSelector(state => state.auth.userToken);
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false);
-    }, 500);
+      setLoading(true);
+    }, 1000);
   });
-
-  if (isLoading) {
-    return <Splash />;
-  }
 
   return (
     <NavigationContainer>
-      <RootStackNavigation userToken={userToken} />
+      <AnimatedSplash
+        translucent={true}
+        isLoaded={isLoading}
+        logoImage={require('assets/logo.png')}
+        backgroundColor={Colors.WHITE}
+        logoHeight={150}
+        logoWidth={150}>
+        <RootStackNavigation userToken={userToken} />
+      </AnimatedSplash>
     </NavigationContainer>
   );
 };
