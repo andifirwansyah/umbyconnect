@@ -23,6 +23,8 @@ const Home = ({navigation}) => {
     handleNavigateCreateThread,
     modalCompletion,
     setModalCompletion,
+    handleCreateReaction,
+    stateChanged,
   } = useHome(navigation);
 
   return (
@@ -40,13 +42,14 @@ const Home = ({navigation}) => {
       />
       <FlatList
         data={threads}
-        extraData={threads}
+        extraData={stateChanged}
         contentContainerStyle={styles.container}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item, index}) => (
           <ThreadCard
             data={item}
             goDetail={() => navigation.navigate('DetailThread', {thread: item})}
+            onReaction={val => handleCreateReaction(val)}
             goProfile={() =>
               navigation.navigate('FriendProfile', {
                 username: item.user.username,

@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useState, useEffect} from 'react';
-import {getThreads} from 'utils';
+import {getThreads, createThreadReaction} from 'utils';
 import {useSelector, useDispatch} from 'react-redux';
 import {setLocalThreads} from 'actions';
 
@@ -14,7 +14,7 @@ const useHome = navigation => {
   const [sortThread, setSortThread] = useState('desc');
   const [threadLimit, setThreadLimit] = useState(10);
   const [modalCompletion, setModalCompletion] = useState(false);
-
+  const [stateChanged, setStateChanged] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -71,6 +71,15 @@ const useHome = navigation => {
     }
   };
 
+  const handleCreateReaction = async params => {
+    const response = await createThreadReaction(params.id, {type: params.type});
+    const thread = threads.find(val => val.id === params.id);
+    if (response.request.status === 200) {
+      thread.total_reaction = response.data.total;
+      setStateChanged(stateChanged => [...stateChanged, thread]);
+    }
+  };
+
   return {
     loading,
     threads,
@@ -82,6 +91,8 @@ const useHome = navigation => {
     handleNavigateCreateThread,
     modalCompletion,
     setModalCompletion,
+    handleCreateReaction,
+    stateChanged,
   };
 };
 

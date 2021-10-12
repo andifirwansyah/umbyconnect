@@ -5,8 +5,15 @@ import {Icon} from 'components';
 import moment from 'moment';
 
 const ThreadCard = props => {
-  const {goDetail, goProfile, detail, data, commentTotal, disableProfile} =
-    props;
+  const {
+    goDetail,
+    goProfile,
+    detail,
+    data,
+    commentTotal,
+    disableProfile,
+    onReaction,
+  } = props;
   return (
     <View style={styles.container(detail)}>
       <View style={styles.tpHCard}>
@@ -46,24 +53,37 @@ const ThreadCard = props => {
       <View style={styles.btHcard(detail)}>
         <View style={styles.btHFlex}>
           <View style={styles.reactionSection}>
-            <TouchableOpacity style={styles.reactionBtn}>
+            <TouchableOpacity
+              style={styles.reactionBtn}
+              onPress={() => onReaction({type: 'beer', id: data.id})}>
               <Image
                 source={require('assets/reaction-icon/beers.png')}
                 style={styles.reactionIcon}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.reactionBtn}>
+            <TouchableOpacity
+              style={styles.reactionBtn}
+              onPress={() => onReaction({type: 'love', id: data.id})}>
               <Image
                 source={require('assets/reaction-icon/love.png')}
                 style={styles.reactionIcon}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.reactionBtn}>
+            <TouchableOpacity
+              style={styles.reactionBtn}
+              onPress={() => onReaction({type: 'raised_hands', id: data.id})}>
               <Image
                 source={require('assets/reaction-icon/raised_hands.png')}
                 style={styles.reactionIcon}
               />
             </TouchableOpacity>
+            {data.total_reaction > 0 && (
+              <View style={styles.reactionTotal}>
+                <Text style={styles.reactionTotalValue}>
+                  {data.total_reaction}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
         <View style={styles.totalViewSection}>

@@ -65,10 +65,12 @@ export default StyleSheet.create({
   }),
   btHFlex: {
     flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   reactionSection: {
     flexDirection: 'row',
-    width: width * 0.3,
+    // width: width * 0.3,
     height: width * 0.08,
     borderRadius: width * 0.015,
     backgroundColor: Colors.WHITE_MEDIUM,
@@ -110,5 +112,16 @@ export default StyleSheet.create({
     fontSize: RFValue(11),
     color: Colors.BLACK_MATE,
     marginLeft: width * 0.01,
+  },
+  reactionTotal: {
+    borderLeftWidth: 1,
+    borderLeftColor: Colors.GRAY_DARK,
+    marginHorizontal: width * 0.025,
+  },
+  reactionTotalValue: {
+    fontSize: RFValue(12),
+    fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
+    color: Colors.PRIMARY_DARK,
+    paddingLeft: width * 0.02,
   },
 });

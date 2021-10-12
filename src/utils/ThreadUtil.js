@@ -20,3 +20,7 @@ export const createThreadCommentReaction = (threadId, commentId, data) => {
 export const createThread = data => {
   return apiPost(`${PROD_HOST}/v1/thread/create`, data);
 };
+
+export const createThreadReaction = (threadId, type) => {
+  return apiPost(`${PROD_HOST}/v1/thread/${threadId}/reaction`, type);
+};
