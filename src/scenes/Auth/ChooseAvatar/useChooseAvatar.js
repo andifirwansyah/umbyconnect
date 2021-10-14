@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import {Platform} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {setUserAvatar, getDefaultAvatar} from 'utils';
-import {storeUserProfile} from 'actions';
+import {storeUserProfile, setChooseAvatarStatus} from 'actions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const useChooseAvatar = navigation => {
@@ -50,14 +50,10 @@ const useChooseAvatar = navigation => {
     const response = await setUserAvatar(formData);
     if (response.request.status === 200) {
       console.log(response.data);
-      userData.forEach((item, index) => {
-        if (item?.avatar) {
-          item.avatar = response.data.avatar;
-        }
-      });
+      userData.avatar = response.data.avatar;
       dispatch(storeUserProfile(userData));
-      await AsyncStorage.setItem('@hasSetAvatar', 'setTed');
-      // navigation.navigate('Main');
+      dispatch(setChooseAvatarStatus(true));
+      navigation.navigate('Main');
     } else {
       alert('Oops! Something went wrong');
     }

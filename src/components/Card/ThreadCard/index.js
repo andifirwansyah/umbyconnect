@@ -14,7 +14,6 @@ const ThreadCard = props => {
     disableProfile,
     onReaction,
   } = props;
-
   const vFormatter = num => {
     return Math.abs(num) > 999
       ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'K'
@@ -43,7 +42,7 @@ const ThreadCard = props => {
           />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={goDetail}>
+      <TouchableOpacity disabled={detail} onPress={goDetail}>
         <Text style={styles.postTitle} numberOfLines={2}>
           {data.title}
         </Text>
@@ -52,6 +51,7 @@ const ThreadCard = props => {
             source={{
               uri: data.image,
             }}
+            resizeMode="cover"
             style={styles.postImage}
           />
         )}
@@ -98,7 +98,10 @@ const ThreadCard = props => {
             {vFormatter(data.total_view ? data.total_view : 0)}
           </Text>
         </View>
-        <View style={styles.totalCommentSection}>
+        <TouchableOpacity
+          disabled={detail}
+          onPress={goDetail}
+          style={styles.totalCommentSection}>
           <Image
             source={require('assets/comments.png')}
             style={styles.commentIcon}
@@ -106,7 +109,7 @@ const ThreadCard = props => {
           <Text style={styles.totalComment}>
             {commentTotal !== undefined ? commentTotal : data.total_comment}
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

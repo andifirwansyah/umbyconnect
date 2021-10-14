@@ -11,8 +11,9 @@ import {
 import {Icon} from 'components';
 import styles from './styles';
 import moment from 'moment';
-
+import { useSelector } from 'react-redux';
 const CommentCard = props => {
+  const userData = useSelector(state => state.user.data);
   const [reactAnimation, setReactAnimation] = useState(new Animated.Value(30));
   const [showReaction, setShowReaction] = useState(false);
   const {goProfile, data, onReaction} = props;
@@ -86,20 +87,20 @@ const CommentCard = props => {
         );
     }
   };
-
+  console.log(data);
   return (
     <View style={styles.container}>
       <View style={{}}>
-        <TouchableOpacity style={styles.profileSection} onPress={goProfile}>
+        <TouchableOpacity disabled={userData.username === data.user.username ? true : false} style={styles.profileSection} onPress={goProfile}>
           <Image source={{uri: data.user.avatar}} style={styles.avatar} />
           <View style={styles.profileInfo}>
             <Text style={styles.fullName}>
               {data.user?.full_name ? data.user.full_name : data.user.username}
             </Text>
             {data.user.major !== null ? (
-              <Text style={styles.commentDate}>{`${data.user.major} | ${moment(data.created_at).startOf('day').fromNow()}`}</Text>
+              <Text style={styles.commentDate}>{`${data.user.major} | ${moment(data.created_at).fromNow()}`}</Text>
               ) : (
-                <Text style={styles.commentDate}>{`${moment(data.created_at).startOf('day').fromNow()}`}</Text>
+                <Text style={styles.commentDate}>{moment(data.created_at).fromNow()}</Text>
               )}
           </View>
         </TouchableOpacity>

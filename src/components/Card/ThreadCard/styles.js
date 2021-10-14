@@ -54,7 +54,7 @@ export default StyleSheet.create({
   },
   postImage: {
     width: '100%',
-    height: width * 0.3,
+    height: width * 0.5,
     borderRadius: width * 0.03,
   },
   btHcard: detail => ({

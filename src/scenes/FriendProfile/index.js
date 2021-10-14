@@ -29,6 +29,7 @@ const FriendProfile = ({route, navigation}) => {
     isFollowing,
     showQRCode,
     setShowQRCode,
+    loadingFollow,
   } = useFriendProfile(route, navigation,);
   const yearClass = profile?.year_class ? profile.year_class : '---';
 
@@ -93,14 +94,21 @@ const FriendProfile = ({route, navigation}) => {
                 />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handleFollow()} style={styles.btnFollow(isFollowing)}>
-                {!isFollowing && (
-                  <Icon
-                    name="person-add-outline"
-                    type="Ionicons"
-                    style={styles.btnIconFollow}
-                  />
+                {loadingFollow ? (
+                  <ActivityIndicator size="small" color={isFollowing ? Colors.PRIMARY : Colors.WHITE} />
+                ) : (
+                  <>
+                  {!isFollowing && (
+                    <Icon
+                      name="person-add-outline"
+                      type="Ionicons"
+                      style={styles.btnIconFollow}
+                    />
+                  )}
+                  <Text style={styles.btnFollowTitle(isFollowing)}>{isFollowing ? 'Batal Mengikuti' : 'Ikuti'}</Text>
+                  </>
                 )}
-                <Text style={styles.btnFollowTitle(isFollowing)}>{isFollowing ? 'Batal Mengikuti' : 'Ikuti'}</Text>
+
               </TouchableOpacity>
               <TouchableOpacity style={styles.btnChat} onPress={() => setShowQRCode(true)}>
                 <Icon
@@ -113,11 +121,11 @@ const FriendProfile = ({route, navigation}) => {
             <View style={styles.lastProfileSection}>
               <View style={styles.lastProfileWrap}>
                 <Text style={styles.lastProfileTotal}>{profile.following}</Text>
-                <Text style={styles.lastProfileLable}>Mengkuti</Text>
+                <Text style={styles.lastProfileLable}>Pengkut</Text>
               </View>
               <View style={[styles.lastProfileWrap, styles.lastProfileBorder]}>
                 <Text style={styles.lastProfileTotal}>{profile.followers}</Text>
-                <Text style={styles.lastProfileLable}>Pengikut</Text>
+                <Text style={styles.lastProfileLable}>Mengikuti</Text>
               </View>
               <View style={styles.lastProfileWrap}>
                 <Text style={styles.lastProfileTotal}>

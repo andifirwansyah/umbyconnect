@@ -58,8 +58,8 @@ export default StyleSheet.create({
     fontSize: RFValue(22),
   },
   reactionIconWrap: {
-    width: width * 0.5,
-    height: width * 0.1,
+    width: width * 0.45,
+    height: width * 0.09,
     backgroundColor: Colors.WHITE_MEDIUM,
     borderRadius: width * 0.015,
     position: 'absolute',
@@ -75,8 +75,8 @@ export default StyleSheet.create({
     marginHorizontal: width * 0.03,
   },
   reactionIcon: {
-    width: width * 0.065,
-    height: width * 0.065,
+    width: width * 0.055,
+    height: width * 0.055,
   },
   reactionCountSection: {
     marginHorizontal: width * 0.012,

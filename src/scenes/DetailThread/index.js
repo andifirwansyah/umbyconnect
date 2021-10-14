@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {View, Text, FlatList, ActivityIndicator, LogBox} from 'react-native';
 import {
   Container,
@@ -12,6 +12,7 @@ import {Colors} from 'styles';
 import useDetailThread from './useDetailThread';
 
 const DetailThread = ({route, navigation}) => {
+  const scrollRef = useRef();
   const {thread, totalView, totalComment} = route.params;
   const {
     loading,
@@ -29,16 +30,24 @@ const DetailThread = ({route, navigation}) => {
       'Non-serializable values were found in the navigation state',
     ]);
   }, []);
-
   return (
     <Container backgroundColor={Colors.WHITE} barStyle="dark-content">
       <Header showShare={true} navigation={navigation} />
       <FlatList
+        ref={scrollRef}
         data={comments}
+        onContentSizeChange={() => scrollRef.current.scrollToEnd()}
+        onLayout={() => scrollRef.current.scrollToEnd()}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item, index}) => (
           <CommentCard
             onReaction={val => handleReactionThread(val, item.id)}
+            goProfile={() =>
+              navigation.navigate('FriendProfile', {
+                username: item.user.username,
+                userId: item.user.id,
+              })
+            }
             data={item}
           />
         )}
@@ -49,6 +58,12 @@ const DetailThread = ({route, navigation}) => {
               data={thread}
               commentTotal={comments.length}
               goDetail={() => navigation.navigate('DetailThread')}
+              goProfile={() =>
+                navigation.navigate('FriendProfile', {
+                  username: thread.user.username,
+                  userId: thread.user.id,
+                })
+              }
             />
             {loading && (
               <ActivityIndicator size="small" color={Colors.PRIMAR} />

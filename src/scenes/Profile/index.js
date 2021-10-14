@@ -12,7 +12,12 @@ import {
   StatusBar,
   LogBox,
 } from 'react-native';
-import {Icon, ThreadCard, ModalCompleteProfile} from 'components';
+import {
+  Icon,
+  ThreadCard,
+  ModalCompleteProfile,
+  CreateThreadCard,
+} from 'components';
 import {Colors} from 'styles';
 import styles from './styles';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -22,7 +27,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = ({navigation}) => {
   const isFocused = useIsFocused();
-  const {userdata, loading, threads, setLimit} = useProfile();
+  const {
+    userdata,
+    loading,
+    threads,
+    setLimit,
+    handleNavigateCreateThread,
+    handleNavigateThreadDetail,
+    stateChanged,
+    handleCreateReaction,
+  } = useProfile(navigation);
   const [modalFillProfile, setModalFillProfile] = useState(false);
   const yearClass = userdata?.year_class ? userdata.year_class : '---';
   useEffect(() => {
@@ -99,13 +113,13 @@ const Profile = ({navigation}) => {
                 <Text style={styles.lastProfileTotal}>
                   {userdata.following}
                 </Text>
-                <Text style={styles.lastProfileLable}>Mengkuti</Text>
+                <Text style={styles.lastProfileLable}>Pengikut</Text>
               </View>
               <View style={[styles.lastProfileWrap, styles.lastProfileBorder]}>
                 <Text style={styles.lastProfileTotal}>
                   {userdata.followers}
                 </Text>
-                <Text style={styles.lastProfileLable}>Pengikut</Text>
+                <Text style={styles.lastProfileLable}>Mengkuti</Text>
               </View>
               <View style={styles.lastProfileWrap}>
                 <Text style={styles.lastProfileTotal}>
@@ -115,7 +129,8 @@ const Profile = ({navigation}) => {
               </View>
             </View>
           </View>
-
+          <View style={styles.separator} />
+          <CreateThreadCard onPress={() => handleNavigateCreateThread()} />
           <View style={styles.separator} />
           <View style={styles.followersSection}>
             <View style={styles.tpFollower}>
@@ -123,14 +138,13 @@ const Profile = ({navigation}) => {
             </View>
             <FlatList
               data={threads}
-              extraData={threads}
+              extraData={stateChanged}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({item, index}) => (
                 <ThreadCard
                   data={item}
-                  goDetail={() =>
-                    navigation.navigate('DetailThread', {thread: item})
-                  }
+                  goDetail={() => handleNavigateThreadDetail(item)}
+                  onReaction={val => handleCreateReaction(val)}
                   disableProfile={true}
                 />
               )}

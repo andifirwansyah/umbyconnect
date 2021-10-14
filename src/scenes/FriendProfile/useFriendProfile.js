@@ -16,6 +16,7 @@ const useFriendProfile = (route, navigation) => {
   const [loadingThreads, setLoadingThreads] = useState(true);
   const [isFollowing, setFollowing] = useState(false);
   const [showQRCode, setShowQRCode] = useState(false);
+  const [loadingFollow, setLoadingFollow] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -62,8 +63,12 @@ const useFriendProfile = (route, navigation) => {
   };
 
   const handleFollow = async () => {
+    setLoadingFollow(true);
     const response = await followUser(userId);
-    setFollowing(response.data.isFollow);
+    if (response.request.status === 200) {
+      setFollowing(response.data.isFollow);
+    }
+    setLoadingFollow(false);
   };
 
   return {
@@ -76,6 +81,7 @@ const useFriendProfile = (route, navigation) => {
     isFollowing,
     showQRCode,
     setShowQRCode,
+    loadingFollow,
   };
 };
 

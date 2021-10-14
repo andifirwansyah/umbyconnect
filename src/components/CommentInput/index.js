@@ -18,10 +18,10 @@ const CommentInput = props => {
   const {onChangeText, value, onSend, loading} = props;
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.linkWrap}>
+      {/* <TouchableOpacity style={styles.linkWrap}>
         <Icon name="link" type="Feather" style={styles.linkIcon} />
-      </TouchableOpacity>
-      <View style={styles.inputSection(height)}>
+      </TouchableOpacity> */}
+      <View style={styles.inputSection(value === '' ? width * 0.11 : height)}>
         <TextInput
           style={styles.input}
           onChangeText={onChangeText}
@@ -33,7 +33,10 @@ const CommentInput = props => {
           onContentSizeChange={e => setHeight(e.nativeEvent.contentSize.height)}
         />
       </View>
-      <TouchableOpacity style={styles.sendWrap} onPress={onSend}>
+      <TouchableOpacity
+        disabled={loading ? true : value === '' ? true : false}
+        style={styles.sendWrap(loading ? true : value === '' ? true : false)}
+        onPress={onSend}>
         {loading ? (
           <ActivityIndicator size="small" color={Colors.WHITE} />
         ) : (

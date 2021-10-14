@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ActivityIndicator, FlatList} from 'react-native';
+import {View, ActivityIndicator, FlatList, Dimensions} from 'react-native';
 import {
   Container,
   Header,
@@ -10,6 +10,7 @@ import {
 import {Colors} from 'styles';
 import styles from './styles';
 import useHome from './useHome';
+const {width} = Dimensions.get('window');
 
 const Home = ({navigation}) => {
   const {
@@ -26,6 +27,7 @@ const Home = ({navigation}) => {
     handleCreateReaction,
     stateChanged,
     handleNavigateThreadDetail,
+    userData,
   } = useHome(navigation);
 
   return (
@@ -51,6 +53,9 @@ const Home = ({navigation}) => {
             data={item}
             goDetail={() => handleNavigateThreadDetail(item)}
             onReaction={val => handleCreateReaction(val)}
+            disableProfile={
+              item.user.username === userData.username ? true : false
+            }
             goProfile={() =>
               navigation.navigate('FriendProfile', {
                 username: item.user.username,
@@ -60,7 +65,9 @@ const Home = ({navigation}) => {
           />
         )}
         ListHeaderComponent={
-          <CreateThreadCard onPress={() => handleNavigateCreateThread()} />
+          <View style={{marginTop: width * 0.04}}>
+            <CreateThreadCard onPress={() => handleNavigateCreateThread()} />
+          </View>
         }
         ListFooterComponent={
           loading && (

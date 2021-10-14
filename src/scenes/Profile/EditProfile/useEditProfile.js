@@ -5,6 +5,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {getFaculty, updateProfile} from 'utils';
 import {storeUserProfile} from 'actions';
 import {Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const useEditProfile = navigation => {
   const userData = useSelector(state => state.user.data);
   const [loading, setLoading] = useState(false);
@@ -98,6 +100,7 @@ const useEditProfile = navigation => {
     const response = await updateProfile(formData);
     if (response.request.status === 200) {
       dispatch(storeUserProfile(response.data));
+      await AsyncStorage.setItem('profileCompletion', 'true');
       showAlert();
       setLoading(false);
     } else {

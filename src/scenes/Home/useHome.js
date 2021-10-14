@@ -110,6 +110,7 @@ const useHome = navigation => {
     handleCreateReaction,
     stateChanged,
     handleNavigateThreadDetail,
+    userData,
   };
 };
 

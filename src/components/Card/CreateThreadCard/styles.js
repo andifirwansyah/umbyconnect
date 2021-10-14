@@ -11,7 +11,7 @@ export default StyleSheet.create({
     paddingVertical: width * 0.015,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: width * 0.04,
+    // marginTop: width * 0.04,
   },
   bubleRadiusIcon: {
     width: width * 0.12,

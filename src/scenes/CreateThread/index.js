@@ -109,7 +109,6 @@ const CreateThread = ({route, navigation}) => {
             </Text>
           )}
           <TextInput
-            autoFocus={true}
             style={styles.bodyInput}
             placeholder="Tulis isi thread disini"
             returnKeyType="none"

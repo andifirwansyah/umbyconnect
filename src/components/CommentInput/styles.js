@@ -47,22 +47,24 @@ export default StyleSheet.create({
     height: heightVal > 40 ? heightVal : width * 0.11,
     backgroundColor: Colors.WHITE_MEDIUM,
     borderRadius: 20,
-    marginHorizontal: width * 0.02,
+    // marginHorizontal: width * 0.02,
   }),
   input: {
     flex: 1,
     fontFamily: Fonts.ARIAL,
     fontSize: RFValue(14),
     paddingHorizontal: width * 0.04,
+    color: Colors.BLACK,
   },
-  sendWrap: {
+  sendWrap: disable => ({
     width: width * 0.1,
     height: width * 0.1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: disable ? Colors.GRAY_LIGHT200 : Colors.PRIMARY,
     borderRadius: width * 0.5,
-  },
+    marginLeft: width * 0.02,
+  }),
   sendIcon: {
     width: width * 0.065,
     height: width * 0.065,

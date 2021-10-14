@@ -26,13 +26,13 @@ const ChooseAvatar = ({navigation}) => {
     handleGetAvatarUploaded,
     handleSetAvatar,
     handleChooseAvatar,
-  } = useChooseAvatar();
+  } = useChooseAvatar(navigation);
   return (
     <Container backgroundColor={Colors.WHITE} barStyle="dark-content">
       <View style={styles.flexTop}>
         <Text style={styles.scTitle}>Selamat datang,</Text>
         <Text style={styles.scSubTitle}>
-          {userData !== undefined && userData[0].username}
+          {userData !== undefined && userData.username}
         </Text>
         <Text style={styles.scNote}>
           Silahkan pilih avatar kamu terlebih dahulu!

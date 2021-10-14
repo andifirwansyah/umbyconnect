@@ -3,3 +3,4 @@ export const SIGN_OUT = 'SIGN_OUT';
 export const USER_PROFILE = 'USER_PROFILE';
 export const THREADS = 'THREAD';
 export const UPDATE_THREADS = 'UPDATE_THREADS';
+export const CHOOSE_AVATAR = 'CHOOSE_AVATAR';

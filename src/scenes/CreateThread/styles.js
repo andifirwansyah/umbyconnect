@@ -12,6 +12,7 @@ export default StyleSheet.create({
     fontSize: RFValue(18),
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
     marginVertical: width * 0.03,
+    color: Colors.BLACK,
   },
   imageSection: {
     flexDirection: 'row',
@@ -46,6 +47,7 @@ export default StyleSheet.create({
     maxHeight: width * 0.8,
     textAlignVertical: 'top',
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
+    color: Colors.BLACK,
   },
   optionSection: {
     width: width,
@@ -239,7 +241,7 @@ export default StyleSheet.create({
   },
   closeModalButton: outline => ({
     marginHorizontal: width * 0.05,
-    height: width * 0.12,
+    height: width * 0.11,
     backgroundColor: outline ? Colors.WHITE : Colors.PRIMARY,
     borderWidth: outline ? 1.5 : 0,
     borderColor: outline ? Colors.PRIMARY : Colors.WHITE,
@@ -250,7 +252,7 @@ export default StyleSheet.create({
     borderRadius: width * 0.047,
   }),
   closeModalButtonTitle: outline => ({
-    fontSize: RFValue(16),
+    fontSize: RFValue(14.5),
     fontFamily: Fonts.ARIAL_ROUNDED_BOLD,
     color: outline ? Colors.PRIMARY : Colors.WHITE,
   }),

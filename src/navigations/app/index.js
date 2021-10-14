@@ -11,24 +11,14 @@ import {
   Setting,
   Notification,
 } from 'scenes';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {useSelector} from 'react-redux';
 const Stack = createNativeStackNavigator();
 const AppStack = () => {
-  const [showAvatarScene, setShowAvatarScene] = useState(true);
-  useEffect(() => {
-    (async () => {
-      const hasSetAvatar = await AsyncStorage.getItem('@hasSetAvatar');
-      if (hasSetAvatar === null) {
-        setShowAvatarScene(true);
-      } else {
-        setShowAvatarScene(false);
-      }
-    })();
-  }, []);
+  const hasChooseAvatar = useSelector(state => state.hasChooseAvatar.data);
+  console.log('HAS CHOOSE AVATAR => ', hasChooseAvatar);
   return (
     <Stack.Navigator
-      initialRouteName={!showAvatarScene ? 'ChooseAvatar' : 'Main'}>
+      initialRouteName={hasChooseAvatar ? 'Main' : 'ChooseAvatar'}>
       <Stack.Group screenOptions={{headerShown: false}}>
         <Stack.Screen name="ChooseAvatar" component={ChooseAvatar} />
         <Stack.Screen name="Main" component={TabNavigator} />

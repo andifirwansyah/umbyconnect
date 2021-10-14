@@ -7,8 +7,17 @@ import useThread from './useThread';
 
 const Thread = ({route, navigation}) => {
   const {params} = route.params;
-  const {loading, threads, filters, handleSortThreads, handleLoadMoreThreads} =
-    useThread(params);
+  const {
+    loading,
+    threads,
+    filters,
+    handleSortThreads,
+    handleLoadMoreThreads,
+    handleNavigateThreadDetail,
+    handleCreateReaction,
+    stateChanged,
+    userData,
+  } = useThread(params, navigation);
 
   return (
     <Container backgroundColor={Colors.WHITE_MEDIUM} barStyle="dark-content">
@@ -27,7 +36,11 @@ const Thread = ({route, navigation}) => {
         renderItem={({item, index}) => (
           <ThreadCard
             data={item}
-            goDetail={() => navigation.navigate('DetailThread', {thread: item})}
+            goDetail={() => handleNavigateThreadDetail(item)}
+            onReaction={val => handleCreateReaction(val)}
+            disableProfile={
+              item.user.username === userData.username ? true : false
+            }
             goProfile={() =>
               navigation.navigate('FriendProfile', {
                 username: item.user.username,

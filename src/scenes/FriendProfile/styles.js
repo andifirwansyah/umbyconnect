@@ -191,9 +191,10 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   followerItem: {
+    width: width * 0.18,
     alignItems: 'center',
     paddingVertical: width * 0.04,
-    marginRight: width * 0.05,
+    // marginRight: width * 0.05,
   },
   followerAvatar: {
     width: width * 0.13,
