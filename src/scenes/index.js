@@ -11,6 +11,8 @@ import Profile from './Profile';
 import EditProfile from './Profile/EditProfile';
 import Setting from './Profile/Setting';
 import Notification from './Notification';
+import Conversation from './Conversation';
+import ChatRoom from './Conversation/ChatRoom';
 
 export {
   SignIn,
@@ -26,4 +28,6 @@ export {
   EditProfile,
   Setting,
   Notification,
+  Conversation,
+  ChatRoom,
 };

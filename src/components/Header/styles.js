@@ -18,6 +18,10 @@ export default StyleSheet.create({
 
     elevation: 5,
   },
+  containerWithoutShadow: {
+    height: width * 0.16,
+    backgroundColor: Colors.WHITE,
+  },
   section: {
     flex: 1,
     flexDirection: 'row',
@@ -110,5 +114,11 @@ export default StyleSheet.create({
     fontFamily: Fonts.ARIAL,
     color: Colors.WHITE,
     fontSize: RFValue(10.5),
+  },
+  avatar: {
+    width: width * 0.09,
+    height: width * 0.09,
+    borderRadius: 75,
+    marginLeft: width * 0.04,
   },
 });

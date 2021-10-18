@@ -10,7 +10,7 @@ module.exports = [
     inactive: require('assets/tab-icons/topics-inactive.png'),
   },
   {
-    key: 'Friend',
+    key: 'Conversation',
     active: require('assets/tab-icons/friends-active.png'),
     inactive: require('assets/tab-icons/friends-inactive.png'),
   },

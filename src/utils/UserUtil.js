@@ -23,6 +23,16 @@ export const getUserFollowers = userId => {
   }
   return apiGet(url);
 };
+export const getUserFollowing = userId => {
+  let url = '';
+  const param = `?user_id=${userId}`;
+  if (userId) {
+    url = `${PROD_HOST}/v1/profile/following${param}`;
+  } else {
+    url = `${PROD_HOST}/v1/profile/following`;
+  }
+  return apiGet(url);
+};
 
 export const getUserThreads = (userId, limit) => {
   return apiGet(`${PROD_HOST}/v1/profile/thread?user_id=${userId}&limit=${limit}`);
@@ -34,4 +44,20 @@ export const followUser = userId => {
 
 export const updateProfile = data => {
   return apiPost(`${PROD_HOST}/v1/profile/update`, data);
+};
+
+export const updateFcmToken = data => {
+  return apiPost(`${PROD_HOST}/v1/profile/update/fcmtoken`, data);
+};
+
+export const getNotifications = () => {
+  return apiGet(`${PROD_HOST}/v1/profile/notification`);
+};
+
+export const readNotification = notificationId => {
+  return apiGet(`${PROD_HOST}/v1/profile/notification/read/${notificationId}`);
+};
+
+export const getNotificationBadge = () => {
+  return apiGet(`${PROD_HOST}/v1/profile/notification/badge`);
 };

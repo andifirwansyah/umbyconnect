@@ -10,6 +10,7 @@ import {
   EditProfile,
   Setting,
   Notification,
+  ChatRoom,
 } from 'scenes';
 import {useSelector} from 'react-redux';
 const Stack = createNativeStackNavigator();
@@ -27,6 +28,7 @@ const AppStack = () => {
         <Stack.Screen name="EditProfile" component={EditProfile} />
         <Stack.Screen name="Setting" component={Setting} />
         <Stack.Screen name="Notification" component={Notification} />
+        <Stack.Screen name="ChatRoom" component={ChatRoom} />
       </Stack.Group>
       <Stack.Group
         screenOptions={{

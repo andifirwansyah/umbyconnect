@@ -1,9 +1,15 @@
 /* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useState, useEffect} from 'react';
-import {getThreads, createThreadReaction} from 'utils';
+import {
+  getThreads,
+  createThreadReaction,
+  trackUserOnline,
+  updateFcmToken,
+} from 'utils';
 import {useSelector, useDispatch} from 'react-redux';
 import {setLocalThreads} from 'actions';
+import PushNotification from 'react-native-push-notification';
 
 const useHome = navigation => {
   const localThreads = useSelector(state => state.threads.data);
@@ -18,7 +24,9 @@ const useHome = navigation => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    trackUserOnline(userData.id);
     handleGetThreads();
+    handleStoreFcmToken();
   }, [threadLimit]);
   const handleGetThreads = async sort => {
     setLoading(localThreads.length > 0 ? false : true);
@@ -94,6 +102,51 @@ const useHome = navigation => {
         setStateChanged(stateChanged => [...stateChanged, thread]);
       },
     });
+  };
+
+  const handleStoreFcmToken = () => {
+    PushNotification.configure({
+      onRegister: function (token) {
+        handleUpdateFcmToken(token.token);
+      },
+      onNotification: function (notification) {
+        console.log('NOTIFICATION:', notification);
+        handleDisplayNotification(notification);
+      },
+      onAction: function (notification) {
+        console.log('ACTION:', notification.action);
+        console.log('NOTIFICATION:', notification);
+      },
+      largeIcon: 'notification_icon',
+      smallIcon: 'notification_icon',
+      popInitialNotification: true,
+      requestPermissions: true,
+    });
+    PushNotification.createChannel(
+      {
+        channelId: 'conversation', // (required)
+        channelName: 'conversation', // (required)
+      },
+      created => console.log(`CreateChannel returned '${created}'`),
+    );
+  };
+
+  const handleDisplayNotification = notification => {
+    PushNotification.localNotification({
+      channelId: 'conversation',
+      priority: 'high',
+      largeIcon: 'notification_icon',
+      smallIcon: 'notification_icon',
+      title: notification.title,
+      message: notification.message,
+    });
+  };
+
+  const handleUpdateFcmToken = async fcmToken => {
+    const response = await updateFcmToken({fcm_token: fcmToken});
+    if (response.request.status === 200) {
+      console.log('FCM TOKEN HAS BEEN STORED => ', response.data.fcm_token);
+    }
   };
 
   return {

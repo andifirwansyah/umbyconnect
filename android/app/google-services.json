@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "660383099243",
+    "project_id": "umbyforum-9309b",
+    "storage_bucket": "umbyforum-9309b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660383099243:android:9505cbfd26a01279a9442e",
+        "android_client_info": {
+          "package_name": "com.umbyconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660383099243-edobd1ghhhkv9s209k1gfb1mq89in7eh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQi7JENtnWphfIKU3RYXuMWAviJ8ga7KQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660383099243-edobd1ghhhkv9s209k1gfb1mq89in7eh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

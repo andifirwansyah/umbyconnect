@@ -31,7 +31,6 @@ const useFriendProfile = (route, navigation) => {
   useEffect(() => {
     handleGetThreads();
   }, [threadsLimit]);
-
   const handleGetUserProfile = async () => {
     const response = await getFriendProfile(username);
     if (response.request.status === 200) {
@@ -67,6 +66,8 @@ const useFriendProfile = (route, navigation) => {
     const response = await followUser(userId);
     if (response.request.status === 200) {
       setFollowing(response.data.isFollow);
+      console.log(response.data);
+      handleGetFollowers();
     }
     setLoadingFollow(false);
   };

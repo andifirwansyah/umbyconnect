@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Image, Dimensions} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icons} from 'constants';
-import {Home, Topic, Thread, Profile} from 'scenes';
+import {Home, Topic, Thread, Profile, Conversation} from 'scenes';
 import {Colors} from 'styles';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const {width} = Dimensions.get('window');
@@ -61,7 +61,7 @@ const TabNavigator = () => (
     })}>
     <TabNav.Screen name="Home" component={Home} />
     <TabNav.Screen name="Topic" component={TopicStackScene} />
-    <TabNav.Screen name="Friend" component={Home} />
+    <TabNav.Screen name="Conversation" component={Conversation} />
     <TabNav.Screen name="Profile" component={Profile} />
     {/* <TabNav.Screen name="Thread" component={Thread} /> */}
   </TabNav.Navigator>

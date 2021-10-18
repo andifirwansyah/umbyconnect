@@ -9,6 +9,7 @@ import ImagePicker from './ImagePicker';
 import ModalQRCode from './ModalQRCode';
 import ModalCompleteProfile from './ModalCompleteProfile';
 import ModalSelection from './ModalSelection';
+import ModalFriend from './ModalFriend';
 
 export {
   Container,
@@ -22,4 +23,5 @@ export {
   ModalQRCode,
   ModalCompleteProfile,
   ModalSelection,
+  ModalFriend,
 };

@@ -3,8 +3,10 @@ import {View, Text, TextInput, TouchableOpacity, Image} from 'react-native';
 import {Icon} from 'components';
 import styles from './styles';
 import {Colors} from 'styles';
+import {getNotificationBadge} from 'utils';
 
 const Header = props => {
+  const [notificationBadge, setNotificationBadge] = React.useState(0);
   const {
     showSearch,
     showNotification,
@@ -16,9 +18,26 @@ const Header = props => {
     sortType,
     editable,
     onGoBack,
+    avatar,
+    onCreateNew,
+    shadow,
   } = props;
+
+  React.useEffect(() => {
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      handleGetNotificationBadge();
+    });
+    return unsubscribe;
+  }, [props.navigation]);
+
+  const handleGetNotificationBadge = async () => {
+    const response = await getNotificationBadge();
+    if (response.request.status === 200) {
+      setNotificationBadge(response.data.badge);
+    }
+  };
   return (
-    <View style={styles.container}>
+    <View style={shadow ? styles.container : styles.containerWithoutShadow}>
       <View style={styles.section}>
         <View style={styles.flexLeft}>
           {showSearch ? (
@@ -45,6 +64,7 @@ const Header = props => {
                   style={styles.arrowLeftIcon}
                 />
               </TouchableOpacity>
+              {avatar && <Image source={{uri: avatar}} style={styles.avatar} />}
               <Text numberOfLines={1} style={styles.smTitle}>
                 {smTitle}
               </Text>
@@ -55,6 +75,19 @@ const Header = props => {
           )}
         </View>
         <View style={styles.flexRight}>
+          {onCreateNew && (
+            <View style={[styles.btnSection, {marginRight: 10}]}>
+              <TouchableOpacity
+                style={styles.btnRightIconSection}
+                onPress={props.onCreateNew}>
+                <Icon
+                  name="new-message"
+                  type="Entypo"
+                  style={styles.arrowLeftIcon}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
           {showNotification && (
             <View style={styles.btnSection}>
               <TouchableOpacity
@@ -64,9 +97,13 @@ const Header = props => {
                   source={require('assets/notification.png')}
                   style={styles.btnRightIcon}
                 />
-                <View style={styles.badgeNotificationSection}>
-                  <Text style={styles.badgeNotificationValue}>2</Text>
-                </View>
+                {notificationBadge > 0 && (
+                  <View style={styles.badgeNotificationSection}>
+                    <Text style={styles.badgeNotificationValue}>
+                      {notificationBadge}
+                    </Text>
+                  </View>
+                )}
               </TouchableOpacity>
             </View>
           )}
@@ -116,6 +153,9 @@ Header.defaultProps = {
   smTitle: '',
   lgTitle: '',
   editable: false,
+  avatar: undefined,
+  onCreateNew: undefined,
+  shadow: true,
 };
 
 export default Header;

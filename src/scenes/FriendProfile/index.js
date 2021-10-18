@@ -86,7 +86,7 @@ const FriendProfile = ({route, navigation}) => {
               .slice(-2)}`}</Text>
             <Text style={styles.bio}>{profile.bio}</Text>
             <View style={styles.btnActionSection}>
-              <TouchableOpacity style={styles.btnChat}>
+              <TouchableOpacity onPress={() => navigation.navigate('ChatRoom', {param: profile})} style={styles.btnChat}>
                 <Icon
                   name="ios-chatbubble-ellipses-outline"
                   type="Ionicons"
@@ -148,7 +148,10 @@ const FriendProfile = ({route, navigation}) => {
                   horizontal={true}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({item, index}) => (
-                    <TouchableOpacity style={styles.followerItem}>
+                    <TouchableOpacity onPress={() => navigation.push('FriendProfile', {
+                      username: item.username,
+                      userId: item.id,
+                    })} style={styles.followerItem}>
                       <Image
                         source={{uri: item.avatar}}
                         style={styles.followerAvatar}
