@@ -26,6 +26,8 @@ const Conversation = ({navigation}) => {
     stateChanged,
     searchKeyword,
     handleSearchConversation,
+    isFetching,
+    handleRefreshData,
   } = useConversation(navigation);
   return (
     <Container
@@ -68,6 +70,8 @@ const Conversation = ({navigation}) => {
       <FlatList
         data={conversations}
         extraData={stateChanged}
+        refreshing={isFetching}
+        onRefresh={() => handleRefreshData()}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item, index}) => (
           <TouchableOpacity

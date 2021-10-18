@@ -15,7 +15,7 @@ export default StyleSheet.create({
   },
   searchInputSection: {
     height: width * 0.09,
-    backgroundColor: Colors.GRAY_LIGHT100,
+    backgroundColor: Colors.GRAY_MEDIUM,
     borderRadius: width * 0.04,
     flexDirection: 'row',
     alignItems: 'center',

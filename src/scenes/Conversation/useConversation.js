@@ -16,6 +16,7 @@ const useConversation = navigation => {
   const [loading, setLoading] = useState(true);
   const [stateChanged, setStateChanged] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [isFetching, setFetching] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -47,6 +48,7 @@ const useConversation = navigation => {
       handleGetUserIndicator(response.data);
       setLoading(false);
     }
+    setFetching(false);
   };
 
   const handleGetLastMessage = async args => {
@@ -91,6 +93,11 @@ const useConversation = navigation => {
     setConversations(newData);
   };
 
+  const handleRefreshData = () => {
+    setFetching(true);
+    handleGetUserConversation();
+  };
+
   return {
     userData,
     followings,
@@ -102,6 +109,8 @@ const useConversation = navigation => {
     stateChanged,
     searchKeyword,
     handleSearchConversation,
+    isFetching,
+    handleRefreshData,
   };
 };
 
